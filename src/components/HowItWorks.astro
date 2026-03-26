@@ -1,27 +1,27 @@
 ---
 interface Node {
   name: string;
-  initial: string;
+  logo: string;
   color: string;
   x: number;
   y: number;
 }
 
 const topNodes: Node[] = [
-  { name: 'Pixelfed',    initial: 'PF', color: '#6366f1', x: 15, y: 6 },
-  { name: 'Mastodon',    initial: 'M',  color: '#6364FF', x: 50, y: 6 },
-  { name: 'WriteFreely', initial: 'WF', color: '#a78bfa', x: 85, y: 6 },
+  { name: 'Pixelfed',    logo: '/images/logos/fediverse/pixelfed.svg',    color: '#6366f1', x: 15, y: 6 },
+  { name: 'Mastodon',    logo: '/images/logos/fediverse/mastodon.svg',    color: '#6364FF', x: 50, y: 6 },
+  { name: 'WriteFreely', logo: '/images/logos/fediverse/writefreely.svg', color: '#a78bfa', x: 85, y: 6 },
 ];
 
 const midNodes: Node[] = [
-  { name: 'Pleroma',     initial: 'Pl', color: '#ec4899', x: 6,  y: 50 },
-  { name: 'PeerTube',    initial: 'PT', color: '#F1680F', x: 94, y: 50 },
+  { name: 'Pleroma',     logo: '/images/logos/fediverse/pleroma.svg',     color: '#ec4899', x: 6,  y: 50 },
+  { name: 'PeerTube',    logo: '/images/logos/fediverse/peertube.svg',    color: '#F1680F', x: 94, y: 50 },
 ];
 
 const bottomNodes: Node[] = [
-  { name: 'Misskey',     initial: 'Mi', color: '#96d04a', x: 15, y: 94 },
-  { name: 'Lemmy',       initial: 'Le', color: '#22d3ee', x: 50, y: 94 },
-  { name: 'Akkoma',      initial: 'Ak', color: '#00BC8C', x: 85, y: 94 },
+  { name: 'Misskey',     logo: '/images/logos/fediverse/misskey.svg',     color: '#96d04a', x: 15, y: 94 },
+  { name: 'Lemmy',       logo: '/images/logos/fediverse/lemmy.svg',       color: '#22d3ee', x: 50, y: 94 },
+  { name: 'Akkoma',      logo: '/images/logos/fediverse/akkoma.svg',      color: '#00BC8C', x: 85, y: 94 },
 ];
 
 const allNodes = [...topNodes, ...midNodes, ...bottomNodes];
@@ -133,13 +133,13 @@ const bottomBusY = 70;
         <div class="cc-hub">
           <div class="cc-hub-glow"></div>
           <div class="cc-hub-ring"></div>
-          <span>AP</span>
+          <img src="/images/logos/fediverse/hackerspub.svg" alt="Hackers' Pub" class="cc-hub-logo" />
         </div>
 
         {/* Top nodes */}
         {topNodes.map((node) => (
           <div class="cc-node" style={`left:${node.x}%;top:${node.y}%;--c:${node.color}`}>
-            <div class="cc-avatar"><span>{node.initial}</span></div>
+            <div class="cc-avatar"><img src={node.logo} alt={node.name} width="28" height="28" /></div>
             <div class="cc-label">{node.name}</div>
           </div>
         ))}
@@ -147,7 +147,7 @@ const bottomBusY = 70;
         {/* Mid nodes */}
         {midNodes.map((node) => (
           <div class="cc-node" style={`left:${node.x}%;top:${node.y}%;--c:${node.color}`}>
-            <div class="cc-avatar"><span>{node.initial}</span></div>
+            <div class="cc-avatar"><img src={node.logo} alt={node.name} width="28" height="28" /></div>
             <div class="cc-label">{node.name}</div>
           </div>
         ))}
@@ -156,7 +156,7 @@ const bottomBusY = 70;
         {bottomNodes.map((node) => (
           <div class="cc-node" style={`left:${node.x}%;top:${node.y}%;--c:${node.color}`}>
             <div class="cc-label">{node.name}</div>
-            <div class="cc-avatar"><span>{node.initial}</span></div>
+            <div class="cc-avatar"><img src={node.logo} alt={node.name} width="28" height="28" /></div>
           </div>
         ))}
       </div>
@@ -255,14 +255,13 @@ const bottomBusY = 70;
     50% { transform: scale(1.15); opacity: 0.8; }
   }
 
-  .cc-hub span {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    color: white;
-    font-weight: 700;
-    letter-spacing: 0.05em;
+  .cc-hub-logo {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
     position: relative;
     z-index: 1;
+    pointer-events: none;
   }
 
   /* Nodes */
@@ -294,11 +293,11 @@ const bottomBusY = 70;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35), 0 0 20px color-mix(in srgb, var(--c) 20%, transparent);
   }
 
-  .cc-avatar span {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--c);
+  .cc-avatar img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    pointer-events: none;
   }
 
   .cc-label {
