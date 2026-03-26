@@ -19,9 +19,9 @@
   }
 
   const colors = [
-    'rgba(99, 102, 241,',   // indigo
-    'rgba(167, 139, 250,',  // violet
-    'rgba(236, 72, 153,',   // pink
+    'rgba(50, 140, 255,',   // blue
+    'rgba(128, 196, 255,',  // blue-bright
+    'rgba(255, 96, 144,',   // pink
     'rgba(34, 211, 238,',   // cyan
   ];
 
@@ -77,7 +77,7 @@
           ctx.beginPath();
           ctx.moveTo(nodes[i].x, nodes[i].y);
           ctx.lineTo(nodes[j].x, nodes[j].y);
-          ctx.strokeStyle = `rgba(167, 139, 250, ${opacity})`;
+          ctx.strokeStyle = `rgba(50, 140, 255, ${opacity})`;
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }

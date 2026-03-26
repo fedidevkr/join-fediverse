@@ -6,7 +6,7 @@ import NetworkBg from './NetworkBg.astro';
   <NetworkBg />
   <div class="hero-ring"></div>
   <div class="hero-ring-2"></div>
-  <div class="hero-badge">연합우주 — Fediverse</div>
+  <div class="hero-badge">— FEDIVERSE —</div>
   <h1 class="hero-title">
     <span class="hero-title-line1">소셜 미디어의</span>
     <span class="hero-title-gradient">다른 가능성</span>
@@ -38,12 +38,11 @@ import NetworkBg from './NetworkBg.astro';
     overflow: hidden;
   }
 
-
   .hero-ring {
     position: absolute;
     width: 500px;
     height: 500px;
-    border: 1px solid rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(50, 140, 255, 0.06);
     border-radius: 50%;
     top: 50%;
     left: 50%;
@@ -54,7 +53,7 @@ import NetworkBg from './NetworkBg.astro';
     position: absolute;
     width: 700px;
     height: 700px;
-    border: 1px solid rgba(167, 139, 250, 0.05);
+    border: 1px solid rgba(50, 140, 255, 0.04);
     border-radius: 50%;
     top: 50%;
     left: 50%;
@@ -62,15 +61,15 @@ import NetworkBg from './NetworkBg.astro';
   }
 
   .hero-badge {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    color: var(--violet);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    color: var(--blue);
     margin-bottom: 2rem;
-    padding: 0.4rem 1.2rem;
-    border: 1px solid rgba(167, 139, 250, 0.2);
-    border-radius: 20px;
-    background: rgba(167, 139, 250, 0.05);
+    padding: 0.4rem 1.4rem;
+    border: 1px solid rgba(50, 140, 255, 0.2);
+    border-radius: 2px;
+    background: rgba(50, 140, 255, 0.05);
     animation: fadeUp 0.8s ease forwards 0.2s;
     opacity: 0;
   }
@@ -83,6 +82,7 @@ import NetworkBg from './NetworkBg.astro';
     margin-bottom: 0.4em;
     animation: fadeUp 0.8s ease forwards 0.4s;
     opacity: 0;
+    position: relative;
   }
 
   .hero-title-line1 {
@@ -91,10 +91,24 @@ import NetworkBg from './NetworkBg.astro';
   }
 
   .hero-title-gradient {
-    background: linear-gradient(135deg, var(--violet), var(--pink), var(--indigo));
+    background: linear-gradient(135deg, var(--blue), var(--pink));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-size: 200% 200%;
+    position: relative;
+  }
+
+  /* Glitch hint: faint offset copy */
+  .hero-title-gradient::after {
+    content: '다른 가능성';
+    position: absolute;
+    left: 3px;
+    top: 2px;
+    background: linear-gradient(135deg, var(--pink), var(--blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0.06;
+    pointer-events: none;
+    filter: blur(1px);
   }
 
   .hero-sub {
@@ -132,16 +146,16 @@ import NetworkBg from './NetworkBg.astro';
   }
 
   .scroll-hint span {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.6rem;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.5rem;
     color: var(--text-dim);
-    letter-spacing: 0.15em;
+    letter-spacing: 0.25em;
   }
 
   .scroll-line {
     width: 1px;
     height: 32px;
-    background: linear-gradient(to bottom, var(--violet), transparent);
+    background: linear-gradient(to bottom, var(--blue), transparent);
   }
 
   @media (max-width: 768px) {
@@ -153,7 +167,7 @@ import NetworkBg from './NetworkBg.astro';
 
   @media (max-width: 480px) {
     .hero { padding: 6rem 1.2rem 3.5rem; min-height: 90vh; }
-    .hero-badge { font-size: 0.6rem; padding: 0.35rem 1rem; margin-bottom: 1.5rem; }
+    .hero-badge { font-size: 0.5rem; padding: 0.35rem 1rem; margin-bottom: 1.5rem; }
     .hero-ring { width: 280px; height: 280px; }
     .hero-ring-2 { width: 400px; height: 400px; }
     .hero-sub { font-size: 0.92rem; line-height: 1.8; }
@@ -163,7 +177,7 @@ import NetworkBg from './NetworkBg.astro';
       width: 100%;
       max-width: 260px;
       text-align: center;
-      font-size: 0.8rem;
+      font-size: 0.72rem;
     }
   }
 </style>
