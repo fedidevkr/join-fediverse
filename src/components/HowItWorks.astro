@@ -1,18 +1,41 @@
 ---
-const services = [
-  { name: 'Mastodon', initial: 'M', color: '#6364FF' },
-  { name: 'Misskey', initial: 'Mi', color: '#96d04a' },
-  { name: 'Pixelfed', initial: 'PF', color: '#6366f1' },
-  { name: 'PeerTube', initial: 'PT', color: '#F1680F' },
-  { name: 'Pleroma', initial: 'Pl', color: '#ec4899' },
-  { name: 'WriteFreely', initial: 'WF', color: '#a78bfa' },
+interface Node {
+  name: string;
+  initial: string;
+  color: string;
+  x: number;
+  y: number;
+}
+
+const topNodes: Node[] = [
+  { name: 'Pixelfed',    initial: 'PF', color: '#6366f1', x: 15, y: 6 },
+  { name: 'Mastodon',    initial: 'M',  color: '#6364FF', x: 50, y: 6 },
+  { name: 'WriteFreely', initial: 'WF', color: '#a78bfa', x: 85, y: 6 },
 ];
+
+const midNodes: Node[] = [
+  { name: 'Pleroma',     initial: 'Pl', color: '#ec4899', x: 6,  y: 50 },
+  { name: 'PeerTube',    initial: 'PT', color: '#F1680F', x: 94, y: 50 },
+];
+
+const bottomNodes: Node[] = [
+  { name: 'Misskey',     initial: 'Mi', color: '#96d04a', x: 15, y: 94 },
+  { name: 'Lemmy',       initial: 'Le', color: '#22d3ee', x: 50, y: 94 },
+  { name: 'Akkoma',      initial: 'Ak', color: '#00BC8C', x: 85, y: 94 },
+];
+
+const allNodes = [...topNodes, ...midNodes, ...bottomNodes];
+
+/* Bus Y positions */
+const topBusY = 30;
+const midBusY = 50;
+const bottomBusY = 70;
 ---
 
 <section id="concept">
   <div class="section-inner">
     <div class="section-meta">
-      <span class="section-num">004</span>
+      <span class="section-num">003</span>
       <div class="section-rule"></div>
       <span class="section-tag">HOW IT WORKS</span>
     </div>
@@ -24,26 +47,116 @@ const services = [
           서비스가 달라도, Mastodon과 Misskey처럼 자연스럽게 소통됩니다. 하나의 회사나 서버가 전체를 통제하지 않습니다. 수천 개의 독립된 공간들이 같은 언어로 대화합니다.
         </p>
       </div>
-      <div class="hub-diagram">
-        <div class="hub-center">
-          <div class="hub-ring hub-ring-1"></div>
-          <div class="hub-ring hub-ring-2"></div>
-          <div class="hub-core">
-            <span class="hub-label">ActivityPub</span>
-          </div>
+
+      <div class="cc">
+        <div class="cc-bg"></div>
+
+        <svg class="cc-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="pkt-glow" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="1" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          {/* ── Horizontal bus segments (only between junctions) ── */}
+          {/* Top bus: PF(15) — M(50) — WF(85) */}
+          <line x1="15" y1={topBusY} x2="50" y2={topBusY} fill="none" stroke="rgba(167,139,250,0.3)" stroke-width="0.5" stroke-dasharray="1.5 1.5" />
+          <line x1="50" y1={topBusY} x2="85" y2={topBusY} fill="none" stroke="rgba(167,139,250,0.3)" stroke-width="0.5" stroke-dasharray="1.5 1.5" />
+          {/* Mid bus: Pl(6) — hub(50) — PT(94) */}
+          <line x1={midNodes[0].x + 6} y1={midBusY} x2="44" y2={midBusY} fill="none" stroke="rgba(167,139,250,0.35)" stroke-width="0.6" stroke-dasharray="1.5 1.5" />
+          <line x1="56" y1={midBusY} x2={midNodes[1].x - 6} y2={midBusY} fill="none" stroke="rgba(167,139,250,0.35)" stroke-width="0.6" stroke-dasharray="1.5 1.5" />
+          {/* Bottom bus: Mi(15) — Le(50) — Ak(85) */}
+          <line x1="15" y1={bottomBusY} x2="50" y2={bottomBusY} fill="none" stroke="rgba(167,139,250,0.3)" stroke-width="0.5" stroke-dasharray="1.5 1.5" />
+          <line x1="50" y1={bottomBusY} x2="85" y2={bottomBusY} fill="none" stroke="rgba(167,139,250,0.3)" stroke-width="0.5" stroke-dasharray="1.5 1.5" />
+
+          {/* Vertical spine: top bus → hub → bottom bus */}
+          <line x1="50" y1={topBusY} x2="50" y2={bottomBusY} fill="none" stroke="rgba(167,139,250,0.25)" stroke-width="0.5" stroke-dasharray="1.5 1.5" />
+
+          {/* ── Top node taps (node → top bus) ── */}
+          {topNodes.map((n) => (
+            <line x1={n.x} y1={n.y + 6} x2={n.x} y2={topBusY} fill="none" stroke="rgba(167,139,250,0.25)" stroke-width="0.4" stroke-dasharray="1.5 1.5" />
+          ))}
+
+          {/* ── Bottom node taps (bottom bus → node) ── */}
+          {bottomNodes.map((n) => (
+            <line x1={n.x} y1={bottomBusY} x2={n.x} y2={n.y - 6} fill="none" stroke="rgba(167,139,250,0.25)" stroke-width="0.4" stroke-dasharray="1.5 1.5" />
+          ))}
+
+          {/* ── Junction dots ── */}
+          {topNodes.map((n) => (
+            <circle cx={n.x} cy={topBusY} r="1" fill="rgba(167,139,250,0.5)" />
+          ))}
+          {bottomNodes.map((n) => (
+            <circle cx={n.x} cy={bottomBusY} r="1" fill="rgba(167,139,250,0.5)" />
+          ))}
+          <circle cx="50" cy={topBusY} r="1" fill="rgba(167,139,250,0.5)" />
+          <circle cx="50" cy={bottomBusY} r="1" fill="rgba(167,139,250,0.5)" />
+
+          {/* ── Packets: always route through AP hub (50,50) ── */}
+
+          {/* Mastodon → hub → Misskey: top-center down to bottom-left */}
+          <circle r="1.5" fill="#6364FF" opacity="0.9" filter="url(#pkt-glow)">
+            <animateMotion dur="5s" repeatCount="indefinite" path={`M 50 12 L 50 ${topBusY} L 50 50 L 50 ${bottomBusY} L 15 ${bottomBusY} L 15 88`} />
+          </circle>
+
+          {/* Pixelfed → hub → PeerTube: top-left across to mid-right */}
+          <circle r="1.5" fill="#6366f1" opacity="0.9" filter="url(#pkt-glow)">
+            <animateMotion dur="5.5s" repeatCount="indefinite" path={`M 15 12 L 15 ${topBusY} L 50 ${topBusY} L 50 50 L 56 50 L 88 50`} />
+          </circle>
+
+          {/* WriteFreely → hub → Lemmy: top-right down to bottom-center */}
+          <circle r="1.3" fill="#a78bfa" opacity="0.85" filter="url(#pkt-glow)">
+            <animateMotion dur="6s" repeatCount="indefinite" path={`M 85 12 L 85 ${topBusY} L 50 ${topBusY} L 50 50 L 50 ${bottomBusY} L 50 88`} />
+          </circle>
+
+          {/* Pleroma → hub → Akkoma: mid-left across to bottom-right */}
+          <circle r="1.5" fill="#ec4899" opacity="0.9" filter="url(#pkt-glow)">
+            <animateMotion dur="5s" repeatCount="indefinite" path={`M 12 50 L 44 50 L 50 50 L 50 ${bottomBusY} L 85 ${bottomBusY} L 85 88`} />
+          </circle>
+
+          {/* Akkoma → hub → Mastodon: bottom-right up to top-center */}
+          <circle r="1.3" fill="#00BC8C" opacity="0.85" filter="url(#pkt-glow)">
+            <animateMotion dur="5.5s" repeatCount="indefinite" path={`M 85 88 L 85 ${bottomBusY} L 50 ${bottomBusY} L 50 50 L 50 ${topBusY} L 50 12`} />
+          </circle>
+
+          {/* PeerTube → hub → Pixelfed: mid-right across to top-left */}
+          <circle r="1.3" fill="#F1680F" opacity="0.85" filter="url(#pkt-glow)">
+            <animateMotion dur="6s" repeatCount="indefinite" path={`M 88 50 L 56 50 L 50 50 L 50 ${topBusY} L 15 ${topBusY} L 15 12`} />
+          </circle>
+        </svg>
+
+        {/* Hub */}
+        <div class="cc-hub">
+          <div class="cc-hub-glow"></div>
+          <div class="cc-hub-ring"></div>
+          <span>AP</span>
         </div>
-        {services.map((svc, i) => (
-          <div
-            class="spoke-node"
-            style={`--angle: ${i * 60}deg; --color: ${svc.color}; --delay: ${i * 0.15}s`}
-          >
-            <div class="spoke-line">
-              <div class="spoke-pulse"></div>
-            </div>
-            <div class="spoke-avatar">
-              <span>{svc.initial}</span>
-            </div>
-            <span class="spoke-name">{svc.name}</span>
+
+        {/* Top nodes */}
+        {topNodes.map((node) => (
+          <div class="cc-node" style={`left:${node.x}%;top:${node.y}%;--c:${node.color}`}>
+            <div class="cc-avatar"><span>{node.initial}</span></div>
+            <div class="cc-label">{node.name}</div>
+          </div>
+        ))}
+
+        {/* Mid nodes */}
+        {midNodes.map((node) => (
+          <div class="cc-node" style={`left:${node.x}%;top:${node.y}%;--c:${node.color}`}>
+            <div class="cc-avatar"><span>{node.initial}</span></div>
+            <div class="cc-label">{node.name}</div>
+          </div>
+        ))}
+
+        {/* Bottom nodes */}
+        {bottomNodes.map((node) => (
+          <div class="cc-node" style={`left:${node.x}%;top:${node.y}%;--c:${node.color}`}>
+            <div class="cc-label">{node.name}</div>
+            <div class="cc-avatar"><span>{node.initial}</span></div>
           </div>
         ))}
       </div>
@@ -55,7 +168,7 @@ const services = [
   .concept-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 5rem;
+    gap: 4rem;
     align-items: center;
   }
 
@@ -79,8 +192,7 @@ const services = [
     font-weight: 600;
   }
 
-  /* Hub-Spoke Diagram */
-  .hub-diagram {
+  .cc {
     position: relative;
     width: 100%;
     aspect-ratio: 1;
@@ -88,185 +200,138 @@ const services = [
     margin: 0 auto;
   }
 
-  /* Center hub */
-  .hub-center {
+  .cc-bg {
+    position: absolute;
+    inset: 8%;
+    border-radius: 16px;
+    background: radial-gradient(circle at 50% 50%, rgba(167, 139, 250, 0.04) 0%, transparent 70%);
+    border: 1px solid rgba(167, 139, 250, 0.06);
+  }
+
+  .cc-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  /* Hub */
+  .cc-hub {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 2;
-  }
-
-  .hub-core {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    background: var(--surface-2);
-    border: 2px solid rgba(167, 139, 250, 0.4);
+    background: linear-gradient(135deg, rgba(167, 139, 250, 0.9), rgba(99, 102, 241, 0.9));
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    z-index: 2;
-    box-shadow: 0 0 40px rgba(167, 139, 250, 0.2);
+    z-index: 3;
+    box-shadow: 0 0 40px rgba(167, 139, 250, 0.3);
   }
 
-  .hub-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.55rem;
-    color: var(--violet);
-    letter-spacing: 0.08em;
-    font-weight: 500;
-  }
-
-  .hub-ring {
+  .cc-hub-glow {
     position: absolute;
+    inset: -20px;
     border-radius: 50%;
-    border: 1px solid rgba(167, 139, 250, 0.08);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(167, 139, 250, 0.15) 0%, transparent 70%);
+    pointer-events: none;
   }
 
-  .hub-ring-1 {
-    width: 240px;
-    height: 240px;
-    animation: hubPulse 4s ease-in-out infinite;
-  }
-
-  .hub-ring-2 {
-    width: 340px;
-    height: 340px;
-    animation: hubPulse 4s ease-in-out infinite 2s;
-  }
-
-  @keyframes hubPulse {
-    0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
-    50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.05); }
-  }
-
-  /* Spoke nodes */
-  .spoke-node {
+  .cc-hub-ring {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    inset: -8px;
+    border-radius: 50%;
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    pointer-events: none;
+    animation: hubRingPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes hubRingPulse {
+    0%, 100% { transform: scale(1); opacity: 0.4; }
+    50% { transform: scale(1.15); opacity: 0.8; }
+  }
+
+  .cc-hub span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: white;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Nodes */
+  .cc-node {
+    position: absolute;
+    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
-    transform:
-      translate(-50%, -50%)
-      rotate(var(--angle))
-      translateY(-150px)
-      rotate(calc(-1 * var(--angle)));
+    gap: 5px;
     z-index: 3;
   }
 
-  .spoke-avatar {
-    width: 48px;
-    height: 48px;
+  .cc-avatar {
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
-    background: var(--surface);
-    border: 2px solid color-mix(in srgb, var(--color) 50%, transparent);
+    background: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.4s;
-    box-shadow: 0 0 20px color-mix(in srgb, var(--color) 15%, transparent);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s;
+    cursor: default;
   }
 
-  .spoke-avatar:hover {
+  .cc-node:hover .cc-avatar {
     transform: scale(1.15);
-    box-shadow: 0 0 30px color-mix(in srgb, var(--color) 30%, transparent);
-    border-color: var(--color);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35), 0 0 20px color-mix(in srgb, var(--c) 20%, transparent);
   }
 
-  .spoke-avatar span {
+  .cc-avatar span {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    font-weight: 500;
-    color: var(--color);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--c);
   }
 
-  .spoke-name {
+  .cc-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.6rem;
+    font-size: 0.52rem;
     color: var(--text-dim);
     letter-spacing: 0.04em;
     white-space: nowrap;
     transition: color 0.3s;
   }
 
-  .spoke-node:hover .spoke-name {
+  .cc-node:hover .cc-label {
     color: var(--text-secondary);
   }
 
-  /* Spoke line (from center to node) */
-  .spoke-line {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 1px;
-    height: 120px;
-    transform-origin: top center;
-    transform:
-      rotate(calc(var(--angle) + 180deg))
-      translateX(-0.5px);
-    background: linear-gradient(
-      to bottom,
-      color-mix(in srgb, var(--color) 30%, transparent),
-      transparent
-    );
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  .spoke-pulse {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--color);
-    transform: translateX(-50%);
-    opacity: 0;
-    animation: spokePulse 3s ease-in-out infinite;
-    animation-delay: var(--delay);
-  }
-
-  @keyframes spokePulse {
-    0% { top: 0; opacity: 0; }
-    15% { opacity: 0.9; }
-    85% { opacity: 0.9; }
-    100% { top: 100%; opacity: 0; }
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    .hub-ring { animation: none; opacity: 0.5; }
-    .spoke-pulse { animation: none; opacity: 0; }
+    .cc-svg circle[filter] { display: none; }
+    .cc-hub-ring { animation: none; opacity: 0.5; }
   }
 
-  /* Responsive */
   @media (max-width: 768px) {
     .concept-layout { grid-template-columns: 1fr; gap: 3rem; }
-    .hub-diagram { max-width: 360px; }
-    .spoke-node { transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-120px) rotate(calc(-1 * var(--angle))); }
-    .spoke-line { height: 90px; }
+    .cc { max-width: 360px; }
   }
 
   @media (max-width: 480px) {
     .concept-heading { font-size: 1.8rem; }
     .concept-body { font-size: 0.92rem; line-height: 1.85; }
-    .hub-diagram { max-width: 300px; }
-    .hub-core { width: 64px; height: 64px; }
-    .hub-label { font-size: 0.48rem; }
-    .hub-ring-1 { width: 180px; height: 180px; }
-    .hub-ring-2 { width: 260px; height: 260px; }
-    .spoke-node { transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-100px) rotate(calc(-1 * var(--angle))); }
-    .spoke-avatar { width: 38px; height: 38px; }
-    .spoke-avatar span { font-size: 0.6rem; }
-    .spoke-name { font-size: 0.5rem; }
-    .spoke-line { height: 70px; }
+    .cc { max-width: 300px; }
+    .cc-hub { width: 48px; height: 48px; }
+    .cc-hub span { font-size: 0.62rem; }
+    .cc-avatar { width: 38px; height: 38px; }
+    .cc-avatar span { font-size: 0.6rem; }
+    .cc-label { font-size: 0.44rem; }
   }
 </style>
