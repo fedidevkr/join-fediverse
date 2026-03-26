@@ -1,0 +1,166 @@
+---
+const protocols = [
+  { left: 'Mastodon', right: 'Misskey' },
+  { left: 'Pixelfed', right: 'Pleroma' },
+  { left: 'PeerTube', right: 'WriteFreely' },
+];
+---
+
+<section id="concept">
+  <div class="section-inner">
+    <div class="section-meta">
+      <span class="section-num">003</span>
+      <div class="section-rule"></div>
+      <span class="section-tag">HOW IT WORKS</span>
+    </div>
+    <div class="concept-layout">
+      <div>
+        <h2 class="concept-heading">어떻게<br />작동하나요</h2>
+        <p class="concept-body">
+          연합우주는 <strong>공통 프로토콜로 연결된 네트워크</strong>입니다.<br /><br />
+          서비스가 달라도, Mastodon과 Misskey처럼 자연스럽게 소통됩니다. 하나의 회사나 서버가 전체를 통제하지 않습니다. 수천 개의 독립된 공간들이 같은 언어로 대화합니다.
+        </p>
+      </div>
+      <div class="protocol-diagram">
+        {protocols.map((row) => (
+          <div class="protocol-row">
+            <div class="protocol-node node-left">{row.left}</div>
+            <div class="protocol-link"><span>ActivityPub</span></div>
+            <div class="protocol-node node-right">{row.right}</div>
+          </div>
+        ))}
+        <p class="protocol-footer">모두 같은 프로토콜 위에서 연결됩니다</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .concept-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .concept-heading {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    margin-bottom: 2rem;
+  }
+
+  .concept-body {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 2;
+    font-weight: 300;
+  }
+
+  .concept-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .protocol-diagram {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .protocol-diagram::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at 50% 0%, var(--glow-indigo), transparent 60%);
+    pointer-events: none;
+  }
+
+  .protocol-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .protocol-row:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .protocol-node {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: 6px;
+    flex-shrink: 0;
+    min-width: 110px;
+    text-align: center;
+  }
+
+  .node-left {
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    color: #93a0ff;
+  }
+
+  .node-right {
+    background: rgba(236, 72, 153, 0.1);
+    border: 1px solid rgba(236, 72, 153, 0.25);
+    color: #f0a0c8;
+  }
+
+  .protocol-link {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(99, 102, 241, 0.3), rgba(236, 72, 153, 0.3));
+  }
+
+  .protocol-link span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    background: var(--surface);
+    padding: 0 8px;
+    position: relative;
+  }
+
+  .protocol-footer {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--violet);
+    letter-spacing: 0.1em;
+    margin-top: 1.8rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 768px) {
+    .concept-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+    .protocol-diagram { padding: 1.8rem; }
+    .protocol-node { min-width: 90px; font-size: 0.7rem; padding: 0.5rem 0.8rem; }
+  }
+
+  @media (max-width: 480px) {
+    .concept-heading { font-size: 1.8rem; }
+    .concept-body { font-size: 0.92rem; line-height: 1.85; }
+    .protocol-diagram { padding: 1.2rem; }
+    .protocol-node { min-width: 75px; font-size: 0.65rem; padding: 0.45rem 0.6rem; }
+    .protocol-link span { font-size: 0.5rem; }
+  }
+</style>

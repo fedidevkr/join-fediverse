@@ -1,0 +1,181 @@
+:root {
+  --bg: #06060a;
+  --surface: #0d0d14;
+  --surface-2: #12121c;
+  --border: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(255, 255, 255, 0.12);
+  --text: #e8e6f0;
+  --text-secondary: #8a879a;
+  --text-dim: #4a4860;
+  --indigo: #6366f1;
+  --violet: #a78bfa;
+  --pink: #ec4899;
+  --cyan: #22d3ee;
+  --amber: #f59e0b;
+  --emerald: #34d399;
+  --glow-indigo: rgba(99, 102, 241, 0.15);
+  --glow-pink: rgba(236, 72, 153, 0.08);
+  --glow-violet: rgba(167, 139, 250, 0.1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Noto Sans KR', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ambient glow layer */
+.ambient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 25% 20%, var(--glow-indigo) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 75% 60%, var(--glow-pink) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 50% 90%, var(--glow-violet) 0%, transparent 70%);
+}
+
+/* Noise texture */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.page {
+  position: relative;
+  z-index: 2;
+}
+
+/* Section common */
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 7rem 2.5rem;
+}
+
+.section-inner-wide {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 7rem 0;
+}
+
+.section-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.section-meta-padded {
+  padding: 0 2.5rem;
+}
+
+.section-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  letter-spacing: 0.2em;
+}
+
+.section-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.section-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  letter-spacing: 0.2em;
+}
+
+/* Accent colors */
+.accent-violet { color: var(--violet); }
+.accent-pink { color: var(--pink); }
+.accent-indigo { color: var(--indigo); }
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Buttons */
+.btn-glow {
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: var(--indigo);
+  color: white;
+  border: none;
+  padding: 0.85rem 2.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 24px rgba(99, 102, 241, 0.4);
+}
+
+.btn-glow:hover {
+  box-shadow: 0 4px 32px rgba(99, 102, 241, 0.6);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  font-size: 0.85rem;
+  font-weight: 400;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-hover);
+  padding: 0.85rem 2.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-ghost:hover {
+  border-color: var(--violet);
+  color: var(--text);
+}
+
+/* ═══ Responsive — Tablet (≤ 768px) ═══ */
+@media (max-width: 768px) {
+  .section-inner { padding: 5rem 1.5rem; }
+  .section-inner-wide { padding: 5rem 0; }
+  .section-meta { margin-bottom: 3rem; }
+  .section-meta-padded { padding: 0 1.5rem; }
+  .btn-glow, .btn-ghost { font-size: 0.8rem; padding: 0.75rem 1.6rem; }
+}
+
+/* ═══ Responsive — Mobile (≤ 480px) ═══ */
+@media (max-width: 480px) {
+  .section-inner { padding: 4rem 1.2rem; }
+  .section-inner-wide { padding: 4rem 0; }
+  .section-meta { margin-bottom: 2.5rem; gap: 1rem; }
+  .section-meta-padded { padding: 0 1.2rem; }
+}

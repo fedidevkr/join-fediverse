@@ -1,0 +1,92 @@
+---
+const items = [
+  { num: '01', text: '플랫폼을 넘어', accent: '연결됩니다', color: 'accent-violet' },
+  { num: '02', text: '타임라인은 알고리즘이 아니라', accent: '내가 만듭니다', color: 'accent-pink' },
+  { num: '03', text: '공간이 사라져도', accent: '관계는 남습니다', color: 'accent-indigo' },
+];
+---
+
+<section id="possibilities">
+  <div class="section-inner">
+    <div class="section-meta">
+      <span class="section-num">002</span>
+      <div class="section-rule"></div>
+      <span class="section-tag">WHY HERE</span>
+    </div>
+    <div class="possibilities-grid">
+      {items.map((item) => (
+        <div class="possibility-item">
+          <span class="possibility-num">{item.num}</span>
+          <p class="possibility-text">
+            {item.text}<br />
+            <span class={item.color}>{item.accent}</span>
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .possibilities-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .possibility-item {
+    padding: 3rem 2.5rem;
+    background: var(--surface);
+    position: relative;
+    transition: all 0.4s;
+    overflow: hidden;
+  }
+
+  .possibility-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .possibility-item:nth-child(1)::before { background: radial-gradient(ellipse at 50% 100%, var(--glow-violet), transparent 70%); }
+  .possibility-item:nth-child(2)::before { background: radial-gradient(ellipse at 50% 100%, var(--glow-pink), transparent 70%); }
+  .possibility-item:nth-child(3)::before { background: radial-gradient(ellipse at 50% 100%, var(--glow-indigo), transparent 70%); }
+
+  .possibility-item:hover::before { opacity: 1; }
+  .possibility-item:hover { background: var(--surface-2); }
+
+  .possibility-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+    margin-bottom: 2rem;
+    display: block;
+  }
+
+  .possibility-text {
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 768px) {
+    .possibilities-grid { grid-template-columns: 1fr; }
+    .possibility-item { padding: 2rem; }
+    .possibility-num { margin-bottom: 1rem; }
+  }
+
+  @media (max-width: 480px) {
+    .possibility-item { padding: 1.8rem 1.5rem; }
+    .possibility-text { font-size: 1.1rem; }
+  }
+</style>

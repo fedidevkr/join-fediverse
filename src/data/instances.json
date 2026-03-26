@@ -1,0 +1,23 @@
+[
+  {
+    "name": "hackers.pub",
+    "url": "https://hackers.pub",
+    "type": "BLOG",
+    "catchphrase": "개발자들의 열린 블로그",
+    "description": "소프트웨어 엔지니어와 개발자들이 모이는 인스턴스. 기술 이야기, 프로젝트 공유, 업계 이야기를 나눕니다."
+  },
+  {
+    "name": "oeee.cafe",
+    "url": "https://oeee.cafe",
+    "type": "GALLERY",
+    "catchphrase": "니치한 감성의 아틀리에",
+    "description": "니치한 감성의 그림 작가들이 모이는 작은 커뮤니티. 독특한 취향의 그림들을 만날 수 있습니다."
+  },
+  {
+    "name": "kurry.social",
+    "url": "https://kurry.social",
+    "type": "MASTODON",
+    "catchphrase": "한국 퍼리들의 아지트",
+    "description": "한국 퍼리 커뮤니티를 위한 인스턴스. 퍼리 아트, 일상 이야기, 국내외 퍼리들과의 교류가 활발합니다."
+  }
+]
