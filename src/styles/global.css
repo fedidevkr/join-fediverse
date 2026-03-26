@@ -229,9 +229,8 @@ body::after {
 
 /* Buttons */
 .btn-glow {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 500;
+  font-size: 0.85rem;
+  font-weight: 600;
   background: var(--blue);
   color: var(--bg);
   border: none;
@@ -240,7 +239,6 @@ body::after {
   cursor: pointer;
   transition: all 0.3s;
   box-shadow: 0 4px 24px rgba(50, 140, 255, 0.4);
-  letter-spacing: 0.05em;
 }
 
 .btn-glow:hover {
@@ -249,8 +247,7 @@ body::after {
 }
 
 .btn-ghost {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   font-weight: 400;
   background: transparent;
   color: var(--text-secondary);
@@ -259,7 +256,6 @@ body::after {
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s;
-  letter-spacing: 0.05em;
 }
 
 .btn-ghost:hover {
