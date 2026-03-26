@@ -1,8 +1,8 @@
 ---
 const items = [
-  { num: '01', text: '플랫폼을 넘어', accent: '연결됩니다', color: 'accent-violet' },
-  { num: '02', text: '타임라인은 알고리즘이 아니라', accent: '내가 만듭니다', color: 'accent-pink' },
-  { num: '03', text: '공간이 사라져도', accent: '관계는 남습니다', color: 'accent-indigo' },
+  { num: '01', text: ['플랫폼을 넘어'], accent: '연결됩니다', color: 'accent-violet' },
+  { num: '02', text: ['타임라인은', '알고리즘이 아니라'], accent: '내가 만듭니다', color: 'accent-pink' },
+  { num: '03', text: ['공간이 사라져도'], accent: '관계는 남습니다', color: 'accent-indigo' },
 ];
 ---
 
@@ -18,7 +18,9 @@ const items = [
         <div class="possibility-item">
           <span class="possibility-num">{item.num}</span>
           <p class="possibility-text">
-            {item.text}<br />
+            {item.text.map((line, i) => (
+              <>{i > 0 && <br />}{line}</>
+            ))}<br />
             <span class={item.color}>{item.accent}</span>
           </p>
         </div>
