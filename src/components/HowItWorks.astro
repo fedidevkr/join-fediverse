@@ -1,35 +1,51 @@
 ---
-const protocols = [
-  { left: 'Mastodon', right: 'Misskey' },
-  { left: 'Pixelfed', right: 'Pleroma' },
-  { left: 'PeerTube', right: 'WriteFreely' },
+const services = [
+  { name: 'Mastodon', initial: 'M', color: '#6364FF' },
+  { name: 'Misskey', initial: 'Mi', color: '#96d04a' },
+  { name: 'Pixelfed', initial: 'PF', color: '#6366f1' },
+  { name: 'PeerTube', initial: 'PT', color: '#F1680F' },
+  { name: 'Pleroma', initial: 'Pl', color: '#ec4899' },
+  { name: 'WriteFreely', initial: 'WF', color: '#a78bfa' },
 ];
 ---
 
 <section id="concept">
   <div class="section-inner">
     <div class="section-meta">
-      <span class="section-num">003</span>
+      <span class="section-num">004</span>
       <div class="section-rule"></div>
       <span class="section-tag">HOW IT WORKS</span>
     </div>
     <div class="concept-layout">
       <div>
-        <h2 class="concept-heading">어떻게 작동하나요</h2>
+        <h2 class="concept-heading">어떻게 가능할까요</h2>
         <p class="concept-body">
           연합우주는 <strong>공통 프로토콜로 연결된 네트워크</strong>입니다.<br /><br />
           서비스가 달라도, Mastodon과 Misskey처럼 자연스럽게 소통됩니다. 하나의 회사나 서버가 전체를 통제하지 않습니다. 수천 개의 독립된 공간들이 같은 언어로 대화합니다.
         </p>
       </div>
-      <div class="protocol-diagram">
-        {protocols.map((row) => (
-          <div class="protocol-row">
-            <div class="protocol-node node-left">{row.left}</div>
-            <div class="protocol-link"><span>ActivityPub</span></div>
-            <div class="protocol-node node-right">{row.right}</div>
+      <div class="hub-diagram">
+        <div class="hub-center">
+          <div class="hub-ring hub-ring-1"></div>
+          <div class="hub-ring hub-ring-2"></div>
+          <div class="hub-core">
+            <span class="hub-label">ActivityPub</span>
+          </div>
+        </div>
+        {services.map((svc, i) => (
+          <div
+            class="spoke-node"
+            style={`--angle: ${i * 60}deg; --color: ${svc.color}; --delay: ${i * 0.15}s`}
+          >
+            <div class="spoke-line">
+              <div class="spoke-pulse"></div>
+            </div>
+            <div class="spoke-avatar">
+              <span>{svc.initial}</span>
+            </div>
+            <span class="spoke-name">{svc.name}</span>
           </div>
         ))}
-        <p class="protocol-footer">모두 같은 프로토콜 위에서 연결됩니다</p>
       </div>
     </div>
   </div>
@@ -40,7 +56,7 @@ const protocols = [
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 5rem;
-    align-items: start;
+    align-items: center;
   }
 
   .concept-heading {
@@ -63,104 +79,194 @@ const protocols = [
     font-weight: 600;
   }
 
-  .protocol-diagram {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 2.5rem;
+  /* Hub-Spoke Diagram */
+  .hub-diagram {
     position: relative;
-    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 420px;
+    margin: 0 auto;
   }
 
-  .protocol-diagram::before {
-    content: '';
+  /* Center hub */
+  .hub-center {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(ellipse at 50% 0%, var(--glow-indigo), transparent 60%);
-    pointer-events: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
   }
 
-  .protocol-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.2rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .protocol-row:last-of-type {
-    margin-bottom: 0;
-  }
-
-  .protocol-node {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    padding: 0.6rem 1.1rem;
-    border-radius: 6px;
-    flex-shrink: 0;
-    min-width: 110px;
-    text-align: center;
-  }
-
-  .node-left {
-    background: rgba(99, 102, 241, 0.1);
-    border: 1px solid rgba(99, 102, 241, 0.25);
-    color: #93a0ff;
-  }
-
-  .node-right {
-    background: rgba(236, 72, 153, 0.1);
-    border: 1px solid rgba(236, 72, 153, 0.25);
-    color: #f0a0c8;
-  }
-
-  .protocol-link {
-    flex: 1;
+  .hub-core {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    border: 2px solid rgba(167, 139, 250, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    height: 1px;
-    background: linear-gradient(90deg, rgba(99, 102, 241, 0.3), rgba(236, 72, 153, 0.3));
+    z-index: 2;
+    box-shadow: 0 0 40px rgba(167, 139, 250, 0.2);
   }
 
-  .protocol-link span {
+  .hub-label {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.55rem;
-    color: var(--text-dim);
-    letter-spacing: 0.1em;
-    background: var(--surface);
-    padding: 0 8px;
-    position: relative;
-  }
-
-  .protocol-footer {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
     color: var(--violet);
-    letter-spacing: 0.1em;
-    margin-top: 1.8rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-    position: relative;
-    z-index: 1;
+    letter-spacing: 0.08em;
+    font-weight: 500;
   }
 
+  .hub-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(167, 139, 250, 0.08);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .hub-ring-1 {
+    width: 240px;
+    height: 240px;
+    animation: hubPulse 4s ease-in-out infinite;
+  }
+
+  .hub-ring-2 {
+    width: 340px;
+    height: 340px;
+    animation: hubPulse 4s ease-in-out infinite 2s;
+  }
+
+  @keyframes hubPulse {
+    0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.05); }
+  }
+
+  /* Spoke nodes */
+  .spoke-node {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--angle))
+      translateY(-150px)
+      rotate(calc(-1 * var(--angle)));
+    z-index: 3;
+  }
+
+  .spoke-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid color-mix(in srgb, var(--color) 50%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s;
+    box-shadow: 0 0 20px color-mix(in srgb, var(--color) 15%, transparent);
+  }
+
+  .spoke-avatar:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 30px color-mix(in srgb, var(--color) 30%, transparent);
+    border-color: var(--color);
+  }
+
+  .spoke-avatar span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--color);
+  }
+
+  .spoke-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    transition: color 0.3s;
+  }
+
+  .spoke-node:hover .spoke-name {
+    color: var(--text-secondary);
+  }
+
+  /* Spoke line (from center to node) */
+  .spoke-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1px;
+    height: 120px;
+    transform-origin: top center;
+    transform:
+      rotate(calc(var(--angle) + 180deg))
+      translateX(-0.5px);
+    background: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color) 30%, transparent),
+      transparent
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .spoke-pulse {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--color);
+    transform: translateX(-50%);
+    opacity: 0;
+    animation: spokePulse 3s ease-in-out infinite;
+    animation-delay: var(--delay);
+  }
+
+  @keyframes spokePulse {
+    0% { top: 0; opacity: 0; }
+    15% { opacity: 0.9; }
+    85% { opacity: 0.9; }
+    100% { top: 100%; opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hub-ring { animation: none; opacity: 0.5; }
+    .spoke-pulse { animation: none; opacity: 0; }
+  }
+
+  /* Responsive */
   @media (max-width: 768px) {
-    .concept-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-    .protocol-diagram { padding: 1.8rem; }
-    .protocol-node { min-width: 90px; font-size: 0.7rem; padding: 0.5rem 0.8rem; }
+    .concept-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .hub-diagram { max-width: 360px; }
+    .spoke-node { transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-120px) rotate(calc(-1 * var(--angle))); }
+    .spoke-line { height: 90px; }
   }
 
   @media (max-width: 480px) {
     .concept-heading { font-size: 1.8rem; }
     .concept-body { font-size: 0.92rem; line-height: 1.85; }
-    .protocol-diagram { padding: 1.2rem; }
-    .protocol-node { min-width: 75px; font-size: 0.65rem; padding: 0.45rem 0.6rem; }
-    .protocol-link span { font-size: 0.5rem; }
+    .hub-diagram { max-width: 300px; }
+    .hub-core { width: 64px; height: 64px; }
+    .hub-label { font-size: 0.48rem; }
+    .hub-ring-1 { width: 180px; height: 180px; }
+    .hub-ring-2 { width: 260px; height: 260px; }
+    .spoke-node { transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-100px) rotate(calc(-1 * var(--angle))); }
+    .spoke-avatar { width: 38px; height: 38px; }
+    .spoke-avatar span { font-size: 0.6rem; }
+    .spoke-name { font-size: 0.5rem; }
+    .spoke-line { height: 70px; }
   }
 </style>

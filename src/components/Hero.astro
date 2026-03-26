@@ -1,8 +1,9 @@
 ---
+import NetworkBg from './NetworkBg.astro';
 ---
 
 <section class="hero">
-  <div class="hero-constellation"></div>
+  <NetworkBg />
   <div class="hero-ring"></div>
   <div class="hero-ring-2"></div>
   <div class="hero-badge">연합우주 — Fediverse</div>
@@ -11,8 +12,8 @@
     <span class="hero-title-gradient">다른 가능성</span>
   </h1>
   <p class="hero-sub">
-    대형 플랫폼 어디에서도 찾기 어려웠던<br />
-    당신의 취향이 모이는 곳, 연합우주
+    플랫폼의 벽을 넘어, 취향으로 연결되는<br />
+    새로운 소셜 네트워크가 있습니다
   </p>
   <div class="hero-actions">
     <a href="#instances" class="btn-glow">내 공간 찾기 →</a>
@@ -37,23 +38,6 @@
     overflow: hidden;
   }
 
-  .hero-constellation {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0.4;
-    background:
-      radial-gradient(1px 1px at 10% 20%, rgba(167, 139, 250, 0.8), transparent),
-      radial-gradient(1px 1px at 30% 65%, rgba(99, 102, 241, 0.6), transparent),
-      radial-gradient(1.5px 1.5px at 55% 15%, rgba(236, 72, 153, 0.7), transparent),
-      radial-gradient(1px 1px at 70% 45%, rgba(167, 139, 250, 0.5), transparent),
-      radial-gradient(1px 1px at 85% 75%, rgba(99, 102, 241, 0.6), transparent),
-      radial-gradient(1.5px 1.5px at 20% 80%, rgba(236, 72, 153, 0.5), transparent),
-      radial-gradient(1px 1px at 45% 40%, rgba(167, 139, 250, 0.4), transparent),
-      radial-gradient(1px 1px at 92% 25%, rgba(99, 102, 241, 0.5), transparent);
-  }
 
   .hero-ring {
     position: absolute;

@@ -13,7 +13,8 @@ const items = [
       <div class="section-rule"></div>
       <span class="section-tag">WHY HERE</span>
     </div>
-    <div class="possibilities-grid">
+    <h2 class="possibilities-heading reveal">그래서 뭐가 다른가요</h2>
+    <div class="possibilities-grid stagger">
       {items.map((item) => (
         <div class="possibility-item">
           <span class="possibility-num">{item.num}</span>
@@ -30,6 +31,18 @@ const items = [
 </section>
 
 <style>
+  .possibilities-heading {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 3.5rem;
+  }
+
+  @media (max-width: 480px) {
+    .possibilities-heading { font-size: 1.8rem; }
+  }
+
   .possibilities-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

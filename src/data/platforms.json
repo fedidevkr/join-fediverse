@@ -1,0 +1,26 @@
+[
+  {
+    "mainstream": { "name": "Instagram", "initial": "IG", "color": "#E4405F" },
+    "fediverse": { "name": "Pixelfed", "initial": "PF", "color": "#6366f1" }
+  },
+  {
+    "mainstream": { "name": "YouTube", "initial": "YT", "color": "#FF0000" },
+    "fediverse": { "name": "PeerTube", "initial": "PT", "color": "#F1680F" }
+  },
+  {
+    "mainstream": { "name": "X (Twitter)", "initial": "X", "color": "#ffffff" },
+    "fediverse": { "name": "Mastodon", "initial": "M", "color": "#6364FF" }
+  },
+  {
+    "mainstream": { "name": "Reddit", "initial": "R", "color": "#FF4500" },
+    "fediverse": { "name": "Lemmy", "initial": "L", "color": "#00BC8C" }
+  },
+  {
+    "mainstream": { "name": "Medium", "initial": "Md", "color": "#ffffff" },
+    "fediverse": { "name": "WriteFreely", "initial": "WF", "color": "#a78bfa" }
+  },
+  {
+    "mainstream": { "name": "GoodReads", "initial": "GR", "color": "#553B08" },
+    "fediverse": { "name": "BookWyrm", "initial": "BW", "color": "#ec4899" }
+  }
+]

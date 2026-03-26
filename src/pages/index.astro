@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
 import Niches from '../components/Niches.astro';
 import Possibilities from '../components/Possibilities.astro';
+import Platforms from '../components/Platforms.astro';
 import HowItWorks from '../components/HowItWorks.astro';
 import Communities from '../components/Communities.astro';
 import Footer from '../components/Footer.astro';
@@ -14,7 +15,25 @@ import Footer from '../components/Footer.astro';
   <Hero />
   <Niches />
   <Possibilities />
+  <Platforms />
   <HowItWorks />
   <Communities />
   <Footer />
 </Layout>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger').forEach((el) => {
+    observer.observe(el);
+  });
+</script>
