@@ -1,109 +1,103 @@
 ---
 const items = [
-  { num: '01', text: ['플랫폼을 넘어'], accent: '연결됩니다', color: 'accent-violet' },
-  { num: '02', text: ['타임라인은', '알고리즘이 아니라'], accent: '내가 만듭니다', color: 'accent-pink' },
-  { num: '03', text: ['공간이 사라져도'], accent: '관계는 남습니다', color: 'accent-indigo' },
+  {
+    num: '01',
+    title: '피드를 내가 고릅니다',
+    body: '무엇을 더 보게 할지 결정하는 기준이 광고 상품이나 체류 시간 최적화가 아닙니다. 팔로우와 취향이 전면에 옵니다.',
+  },
+  {
+    num: '02',
+    title: '공동체의 온도가 다릅니다',
+    body: '서버마다 운영자와 규칙, 금지되는 분위기, 환영받는 문화가 다릅니다. 그래서 “어디에 있느냐”가 꽤 중요합니다.',
+  },
+  {
+    num: '03',
+    title: '옮겨도 관계가 남습니다',
+    body: '마음에 들지 않으면 다른 공간으로 이동할 수 있고, 중앙 회사 하나가 전체를 닫아버리는 구조도 아닙니다.',
+  },
 ];
 ---
 
 <section id="possibilities">
   <div class="section-inner">
     <div class="section-meta">
-      <span class="section-num">002</span>
+      <span class="section-num">03</span>
       <div class="section-rule"></div>
-      <span class="section-tag">WHY HERE</span>
+      <span class="section-tag">Why people stay</span>
     </div>
-    <h2 class="possibilities-heading reveal">그래서 뭐가 다른가요</h2>
-    <div class="possibilities-grid stagger">
+
+    <h2 class="section-title reveal">
+      여기가 단지 “대안” 이상인 이유.
+    </h2>
+    <p class="section-copy reveal">
+      연합우주의 장점은 기능 목록보다 구조에서 나옵니다.
+      일단 적응하고 나면 더 조용하고, 덜 조급하고, 오래 쓰기 좋다는 이야기가 반복됩니다.
+    </p>
+
+    <div class="possibility-grid stagger">
       {items.map((item) => (
-        <div class="possibility-item">
+        <article class="possibility-card">
           <span class="possibility-num">{item.num}</span>
-          <p class="possibility-text">
-            {item.text.map((line, i) => (
-              <>{i > 0 && <br />}{line}</>
-            ))}<br />
-            <span class={item.color}>{item.accent}</span>
-          </p>
-        </div>
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+        </article>
       ))}
     </div>
   </div>
 </section>
 
 <style>
-  .possibilities-heading {
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    font-weight: 900;
-    letter-spacing: -0.03em;
-    line-height: 1.15;
-    margin-bottom: 3.5rem;
-  }
-
-  @media (max-width: 480px) {
-    .possibilities-heading { font-size: 1.8rem; }
-  }
-
-  .possibilities-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-  }
-
-  .possibility-item {
-    padding: 3rem 2.5rem;
-    background: var(--surface);
-    backdrop-filter: blur(8px);
+  .possibility-grid {
     position: relative;
-    transition: all 0.4s;
-    overflow: hidden;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
   }
 
-  .possibility-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0;
-    transition: opacity 0.4s;
+  .possibility-card {
+    padding: 1.6rem;
+    border-radius: var(--radius-lg);
+    background:
+      linear-gradient(180deg, rgba(255, 251, 245, 0.82), rgba(247, 239, 223, 0.88));
+    border: 1px solid rgba(88, 69, 45, 0.12);
+    min-height: 250px;
   }
-
-  .possibility-item:nth-child(1)::before { background: radial-gradient(ellipse at 50% 100%, var(--glow-violet), transparent 70%); }
-  .possibility-item:nth-child(2)::before { background: radial-gradient(ellipse at 50% 100%, var(--glow-pink), transparent 70%); }
-  .possibility-item:nth-child(3)::before { background: radial-gradient(ellipse at 50% 100%, var(--glow-indigo), transparent 70%); }
-
-  .possibility-item:hover::before { opacity: 1; }
-  .possibility-item:hover { background: var(--surface-2); }
 
   .possibility-num {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: rgba(50, 140, 255, 0.25);
-    letter-spacing: 0.05em;
-    margin-bottom: 1.2rem;
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-bottom: 1rem;
+    border-radius: 50%;
+    background: rgba(47, 90, 75, 0.1);
+    color: var(--sage);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
   }
 
-  .possibility-text {
-    font-size: 1.3rem;
-    font-weight: 700;
-    line-height: 1.5;
+  .possibility-card h3 {
+    font-size: 1.24rem;
+    line-height: 1.35;
+    margin-bottom: 0.7rem;
   }
 
-  @media (max-width: 768px) {
-    .possibilities-grid { grid-template-columns: 1fr; }
-    .possibility-item { padding: 2rem; }
-    .possibility-num { margin-bottom: 1rem; }
+  .possibility-card p {
+    color: var(--text-soft);
+    line-height: 1.85;
+    font-size: 0.95rem;
   }
 
-  @media (max-width: 480px) {
-    .possibility-item { padding: 1.8rem 1.5rem; }
-    .possibility-text { font-size: 1.1rem; }
+  @media (max-width: 900px) {
+    .possibility-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .possibility-card {
+      min-height: auto;
+    }
   }
 </style>

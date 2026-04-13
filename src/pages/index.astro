@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
 import Niches from '../components/Niches.astro';
+import Platforms from '../components/Platforms.astro';
 import Possibilities from '../components/Possibilities.astro';
 import HowItWorks from '../components/HowItWorks.astro';
 import Communities from '../components/Communities.astro';
@@ -11,17 +12,21 @@ import Footer from '../components/Footer.astro';
 
 <Layout title="연합우주 — 소셜 미디어의 다른 가능성">
   <Nav />
-  <Hero />
-  <div class="holo-divider"></div>
-  <Niches />
-  <div class="holo-divider"></div>
-  <Possibilities />
-  <div class="holo-divider"></div>
-  <HowItWorks />
-  <div class="holo-divider"></div>
-  <Communities />
-  <div class="holo-divider"></div>
-  <Footer />
+  <main class="site-main">
+    <Hero />
+    <div class="holo-divider"></div>
+    <Niches />
+    <div class="holo-divider"></div>
+    <Platforms />
+    <div class="holo-divider"></div>
+    <Possibilities />
+    <div class="holo-divider"></div>
+    <HowItWorks />
+    <div class="holo-divider"></div>
+    <Communities />
+    <div class="holo-divider"></div>
+    <Footer />
+  </main>
 </Layout>
 
 <script>

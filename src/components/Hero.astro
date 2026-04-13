@@ -1,183 +1,502 @@
 ---
-import NetworkBg from './NetworkBg.astro';
+const highlights = [
+  '알고리즘 추천보다 팔로우와 관심사가 먼저 보입니다.',
+  '서버마다 분위기와 규칙이 달라서 내 취향에 맞는 곳을 고를 수 있습니다.',
+  '하나의 계정으로 시작해도 다른 서비스의 사람들과 이어질 수 있습니다.',
+];
+
+const cards = [
+  {
+    label: '무엇이 다른가',
+    title: '광고 플랫폼이 아니라 공동체의 네트워크',
+    body: '하나의 회사가 전체 경험을 통제하지 않습니다. 작은 공간들이 서로 연결된 구조라 분위기와 운영 철학이 더 중요합니다.',
+  },
+  {
+    label: '처음 할 일',
+    title: '완벽한 답보다 첫 번째 집을 고르기',
+    body: '가입할 곳이 고민되면 앱 이름보다 커뮤니티 성격을 먼저 보세요. 마음에 들지 않으면 나중에 옮길 수 있습니다.',
+  },
+];
+
+const stats = [
+  { value: 'Mastodon', label: '짧은 글과 대화' },
+  { value: 'Pixelfed', label: '사진과 작업 기록' },
+  { value: 'WriteFreely', label: '긴 글과 블로그' },
+];
+
+const networkNodes = [
+  { name: 'Mastodon', logo: '/images/logos/fediverse/mastodon.svg', className: 'network-node-top' },
+  { name: 'Pixelfed', logo: '/images/logos/fediverse/pixelfed.svg', className: 'network-node-right' },
+  { name: 'WriteFreely', logo: '/images/logos/fediverse/writefreely.svg', className: 'network-node-bottom' },
+];
 ---
 
-<section class="hero">
-  <NetworkBg />
-  <div class="hero-ring"></div>
-  <div class="hero-ring-2"></div>
-  <div class="hero-badge">— FEDIVERSE —</div>
-  <h1 class="hero-title">
-    <span class="hero-title-line1">소셜 미디어의</span>
-    <span class="hero-title-gradient">다른 가능성</span>
-  </h1>
-  <p class="hero-sub">
-    플랫폼의 벽을 넘어, 취향으로 연결되는<br />
-    새로운 소셜 네트워크가 있습니다
-  </p>
-  <div class="hero-actions">
-    <a href="#instances" class="btn-glow">내 공간 찾기 →</a>
-    <a href="#niches" class="btn-ghost">더 알아보기</a>
+<section id="top" class="hero-panel">
+  <div class="hero-copy reveal">
+    <div class="eyebrow">A softer internet</div>
+    <h1>
+		<span>소셜 미디어를</span>
+		<span>조금 더 작고,</span>
+      <span>좋은 방향으로.</span>
+    </h1>
+    <p class="hero-deck">
+      연합우주는 더 크고 더 시끄러운 플랫폼을 하나 더 만드는 곳이 아닙니다.
+      대신 마음이 맞는 사람들과 오래 머물 수 있는 작은 공간들이 서로 연결되는 방식입니다.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#instances" class="btn-primary">시작할 커뮤니티 보기</a>
+      <a href="#concept" class="btn-secondary">연합우주 구조 이해하기</a>
+    </div>
+
+    <ul class="hero-highlights">
+      {highlights.map((item) => (
+        <li>{item}</li>
+      ))}
+    </ul>
   </div>
-  <div class="scroll-hint">
-    <span>SCROLL</span>
-    <div class="scroll-line"></div>
+
+  <div class="hero-side reveal-right">
+    <div class="hero-side-main">
+      <div class="hero-cards">
+        {cards.map((card) => (
+          <article class="hero-card">
+            <span class="hero-card-label">{card.label}</span>
+            <h2>{card.title}</h2>
+            <p>{card.body}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="hero-network reveal-scale">
+        <div class="network-intro">
+          <span>Connected services</span>
+          <strong>서로 다른 모양의 공간이 한 네트워크 위에 있습니다</strong>
+        </div>
+
+        <div class="network-stage">
+          <div class="network-ring network-ring-outer"></div>
+          <div class="network-ring network-ring-inner"></div>
+
+          <div class="network-node network-node-center">
+            <div class="network-core-glyph" aria-hidden="true">🌐</div>
+          </div>
+
+          {networkNodes.map((node) => (
+            <div class={`network-node network-node-service ${node.className}`}>
+              <img src={node.logo} alt={node.name} width="34" height="34" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-stats stagger">
+      {stats.map((stat) => (
+        <article class="stat-card">
+          <h3>{stat.value}</h3>
+          <p>{stat.label}</p>
+        </article>
+      ))}
+    </div>
   </div>
 </section>
 
 <style>
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 8rem 2rem 6rem;
+  .hero-panel {
+    width: min(1180px, calc(100vw - 2.5rem));
+    margin: 0 auto;
+    padding: 3.4rem 3.6rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+    background:
+      linear-gradient(180deg, rgba(252, 253, 249, 0.94), rgba(239, 245, 238, 0.96));
+    border: 1px solid rgba(49, 66, 56, 0.12);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow);
     position: relative;
     overflow: hidden;
   }
 
-  .hero-ring {
+  .hero-panel::before {
+    content: '';
     position: absolute;
-    width: 500px;
-    height: 500px;
-    border: 1px solid rgba(50, 140, 255, 0.06);
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .hero-ring-2 {
-    position: absolute;
-    width: 700px;
-    height: 700px;
-    border: 1px solid rgba(50, 140, 255, 0.04);
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .hero-badge {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.6rem;
-    letter-spacing: 0.35em;
-    color: var(--blue);
-    margin-bottom: 2rem;
-    padding: 0.4rem 1.4rem;
-    border: 1px solid rgba(50, 140, 255, 0.2);
-    border-radius: 2px;
-    background: rgba(50, 140, 255, 0.05);
-    animation: fadeUp 0.8s ease forwards 0.2s;
-    opacity: 0;
-  }
-
-  .hero-title {
-    font-size: clamp(2.8rem, 7vw, 5.5rem);
-    font-weight: 900;
-    line-height: 1.1;
-    letter-spacing: -0.04em;
-    margin-bottom: 0.4em;
-    animation: fadeUp 0.8s ease forwards 0.4s;
-    opacity: 0;
-    position: relative;
-  }
-
-  .hero-title-line1 {
-    display: block;
-    margin-bottom: 0.05em;
-  }
-
-  .hero-title-gradient {
-    background: linear-gradient(135deg, var(--blue), var(--pink));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    position: relative;
-  }
-
-  /* Glitch hint: faint offset copy */
-  .hero-title-gradient::after {
-    content: '다른 가능성';
-    position: absolute;
-    left: 3px;
-    top: 2px;
-    background: linear-gradient(135deg, var(--pink), var(--blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    opacity: 0.06;
+    inset: 0;
+    background:
+      radial-gradient(circle at 82% 18%, rgba(169, 99, 56, 0.08), transparent 18%),
+      radial-gradient(circle at 8% 86%, rgba(47, 90, 75, 0.1), transparent 18%);
     pointer-events: none;
-    filter: blur(1px);
   }
 
-  .hero-sub {
-    font-size: 1.15rem;
-    color: var(--text-secondary);
+  .hero-copy,
+  .hero-side {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-copy {
+    max-width: 1040px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    margin-bottom: 1rem;
+    padding: 0.42rem 0.74rem;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(49, 66, 56, 0.1);
+    color: var(--terracotta);
+    font-size: 0.72rem;
+  }
+
+  h1 {
+    display: grid;
+    gap: 0.15em;
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(3rem, 7vw, 5.4rem);
+    line-height: 1.08;
+    letter-spacing: -0.045em;
+    font-weight: 700;
+    max-width: 14ch;
+    word-break: keep-all;
+  }
+
+  h1 span:nth-child(2) {
+    color: var(--sage);
+  }
+
+  .hero-deck {
+    margin-top: 1.45rem;
+    max-width: 44rem;
+    font-size: 1.05rem;
     line-height: 1.9;
-    max-width: 440px;
-    margin: 0 auto 2.5rem;
-    font-weight: 300;
-    animation: fadeUp 0.8s ease forwards 0.6s;
-    opacity: 0;
+    color: var(--text-soft);
+    word-break: keep-all;
   }
 
   .hero-actions {
     display: flex;
-    gap: 0.75rem;
-    justify-content: center;
-    animation: fadeUp 0.8s ease forwards 0.8s;
-    opacity: 0;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 1.9rem;
   }
 
-  .hero-actions a {
-    text-decoration: none;
+  .hero-highlights {
+    list-style: none;
+    margin-top: 1.8rem;
+    display: grid;
+    gap: 0.8rem;
+    max-width: 38rem;
   }
 
-  .scroll-hint {
+  .hero-highlights li {
+    position: relative;
+    padding-left: 1.1rem;
+    color: var(--text-soft);
+    line-height: 1.75;
+  }
+
+  .hero-highlights li::before {
+    content: '';
     position: absolute;
-    bottom: 2rem;
+    left: 0;
+    top: 0.72rem;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  .hero-side {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .hero-side-main {
+    display: grid;
+    grid-template-columns: minmax(300px, 0.9fr) minmax(320px, 1.1fr);
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .hero-cards,
+  .hero-network,
+  .stat-card {
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.52);
+    border: 1px solid rgba(49, 66, 56, 0.1);
+  }
+
+  .hero-cards {
+    display: grid;
+    gap: 0.9rem;
+    height: 100%;
+  }
+
+  .hero-card {
+    padding: 1.3rem 1.35rem;
+  }
+
+  .hero-card-label {
+    display: inline-flex;
+    margin-bottom: 0.55rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .hero-card h2 {
+    font-size: 1.28rem;
+    line-height: 1.45;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-card p {
+    margin-top: 0.7rem;
+    color: var(--text-soft);
+    line-height: 1.8;
+    font-size: 0.95rem;
+  }
+
+  .hero-network {
+    padding: 1.3rem;
+    height: 100%;
+  }
+
+  .network-intro span {
+    display: inline-flex;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+  }
+
+  .network-intro strong {
+    display: block;
+    margin-top: 0.55rem;
+    font-size: 1.12rem;
+    line-height: 1.6;
+    letter-spacing: -0.02em;
+  }
+
+  .network-stage {
+    position: relative;
+    min-height: 295px;
+    margin-top: 1rem;
+    display: grid;
+    place-items: center;
+  }
+
+  .network-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px dashed rgba(49, 66, 56, 0.14);
+  }
+
+  .network-ring-outer {
+    width: 290px;
+    height: 290px;
+  }
+
+  .network-ring-inner {
+    width: 200px;
+    height: 200px;
+  }
+
+  .network-node {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(49, 66, 56, 0.1);
+    box-shadow: 0 10px 24px rgba(34, 47, 39, 0.08);
+    font-weight: 700;
+  }
+
+  .network-node-service {
+    width: 84px;
+    height: 84px;
+    min-height: 0;
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  .network-node-service img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+  }
+
+  .network-node-center {
+    width: 160px;
+    height: 160px;
+    flex-direction: column;
+    border-radius: 50%;
+    background: rgba(47, 90, 75, 0.08);
+    border: 1px solid rgba(47, 90, 75, 0.18);
+    color: var(--sage);
+    box-shadow: none;
+  }
+
+  .network-node-center span {
+    display: none;
+  }
+
+  .network-core-glyph {
+    font-size: 2.4rem;
+    line-height: 1;
+    opacity: 0.9;
+  }
+
+  .network-node-top {
+    top: 0.35rem;
     left: 50%;
     transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
   }
 
-  .scroll-hint span {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.5rem;
-    color: var(--text-dim);
-    letter-spacing: 0.25em;
+  .network-node-right {
+    right: 50%;
+    top: 50%;
+    transform: translate(158px, -50%);
   }
 
-  .scroll-line {
-    width: 1px;
-    height: 32px;
-    background: linear-gradient(to bottom, var(--blue), transparent);
+  .network-node-bottom {
+    bottom: 0.1rem;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
-  @media (max-width: 768px) {
-    .hero { padding: 7rem 1.5rem 4rem; }
-    .hero-ring { width: 350px; height: 350px; }
-    .hero-ring-2 { width: 500px; height: 500px; }
-    .hero-sub { font-size: 1rem; margin-bottom: 2rem; }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.8rem;
   }
 
-  @media (max-width: 480px) {
-    .hero { padding: 6rem 1.2rem 3.5rem; min-height: 90vh; }
-    .hero-badge { font-size: 0.5rem; padding: 0.35rem 1rem; margin-bottom: 1.5rem; }
-    .hero-ring { width: 280px; height: 280px; }
-    .hero-ring-2 { width: 400px; height: 400px; }
-    .hero-sub { font-size: 0.92rem; line-height: 1.8; }
-    .hero-actions { flex-direction: column; align-items: center; gap: 0.6rem; }
-    .hero-actions :global(.btn-glow),
-    .hero-actions :global(.btn-ghost) {
-      width: 100%;
-      max-width: 260px;
-      text-align: center;
-      font-size: 0.72rem;
+  .stat-card {
+    padding: 1rem 0.95rem;
+    min-height: 108px;
+  }
+
+  .stat-card h3 {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .stat-card p {
+    margin-top: 0.45rem;
+    color: var(--text-soft);
+    font-size: 0.86rem;
+    line-height: 1.65;
+  }
+
+  @media (max-width: 1100px) {
+    .hero-panel {
+      padding: 2.6rem;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .hero-panel {
+      width: min(1180px, calc(100vw - 2rem));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero-panel {
+      width: min(1180px, calc(100vw - 1.25rem));
+      padding: 1.35rem 1.15rem 1.8rem;
+      border-radius: var(--radius-xl);
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 9.8vw, 3rem);
+      line-height: 1.14;
+      letter-spacing: -0.04em;
+      max-width: none;
+    }
+
+    .hero-deck {
+      font-size: 0.98rem;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+    }
+
+    .hero-card {
+      padding: 1rem;
+    }
+
+    .hero-side-main {
+      grid-template-columns: 1fr;
+    }
+
+    .network-stage {
+      min-height: 250px;
+    }
+
+    .network-ring-outer {
+      width: 244px;
+      height: 244px;
+    }
+
+    .network-ring-inner {
+      width: 168px;
+      height: 168px;
+    }
+
+    .network-node {
+      min-height: 46px;
+      padding: 0.7rem 0.85rem;
+      font-size: 0.92rem;
+    }
+
+    .network-node-service {
+      width: 68px;
+      height: 68px;
+      min-height: 0;
+      padding: 0;
+    }
+
+    .network-node-service img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .network-node-center {
+      width: 134px;
+      height: 134px;
+    }
+
+    .network-core-glyph {
+      font-size: 1.9rem;
+    }
+
+    .network-node-center strong {
+      font-size: 1.55rem;
+    }
+
+    .network-node-right {
+      right: 50%;
+      transform: translate(132px, -50%);
+    }
+
+    .hero-stats {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .hero-side-main {
+      grid-template-columns: 1fr;
     }
   }
 </style>

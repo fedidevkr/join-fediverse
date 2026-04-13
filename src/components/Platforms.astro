@@ -5,216 +5,222 @@ import platforms from '../data/platforms.json';
 <section id="platforms">
   <div class="section-inner">
     <div class="section-meta">
-      <span class="section-num">003</span>
+      <span class="section-num">02</span>
       <div class="section-rule"></div>
-      <span class="section-tag">ALTERNATIVES</span>
+      <span class="section-tag">Familiar, but different</span>
     </div>
-    <h2 class="platforms-heading reveal">지금 쓰는 것들, 여기에도 있습니다</h2>
-    <p class="platforms-sub reveal">
-      익숙한 서비스마다 연합우주의 대안이 준비되어 있습니다.
-    </p>
-    <div class="platforms-grid">
-      {platforms.map((pair, i) => (
-        <div class="platform-row" style={`--delay: ${i * 0.1}s`}>
-          <div class="platform-card mainstream">
-            <div class="platform-logo" style={`--logo-color: ${pair.mainstream.color}`}>
-              <span class="platform-initial">{pair.mainstream.initial}</span>
+
+    <div class="platforms-header">
+      <div>
+        <h2 class="section-title reveal">익숙한 사용 방식은 남기고, 구조만 바꿉니다.</h2>
+        <p class="section-copy reveal">
+          사진은 사진답게, 글은 글답게, 짧은 대화는 짧은 대화답게 쓸 수 있습니다.
+          다만 한 회사 안에서 잠기지 않고, 서비스끼리 느슨하게 연결된다는 점이 다릅니다.
+        </p>
+      </div>
+      <aside class="platforms-note reveal-right">
+        <strong>중요한 차이</strong>
+        <p>대안을 찾는다는 말은 복제본을 찾는다는 뜻이 아닙니다. 더 작은 문화와 다른 운영 철학까지 함께 고르는 일에 가깝습니다.</p>
+      </aside>
+    </div>
+
+    <div class="platforms-grid stagger">
+      {platforms.map((pair) => (
+        <article class="platform-row">
+          <div class="platform-card">
+            <span class="platform-token" style={`--token:${pair.mainstream.color}`}>{pair.mainstream.initial}</span>
+            <div class="platform-copy">
+              <strong>{pair.mainstream.name}</strong>
+              <span class="platform-side">익숙한 서비스</span>
             </div>
-            <span class="platform-name">{pair.mainstream.name}</span>
           </div>
-          <div class="platform-arrow">
-            <div class="arrow-line"></div>
-            <div class="arrow-pulse"></div>
-            <svg class="arrow-head" width="12" height="12" viewBox="0 0 12 12" fill="none">
-              <path d="M2 2L10 6L2 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+          <div class="platform-arrow" aria-hidden="true">
+            <span></span>
           </div>
-          <div class="platform-card fediverse">
-            <div class="platform-logo" style={`--logo-color: ${pair.fediverse.color}`}>
-              <span class="platform-initial">{pair.fediverse.initial}</span>
+          <div class="platform-card fediverse-card">
+            <span class="platform-token" style={`--token:${pair.fediverse.color}`}>{pair.fediverse.initial}</span>
+            <div class="platform-copy">
+              <strong>{pair.fediverse.name}</strong>
+              <span class="platform-side">연합우주의 선택지</span>
             </div>
-            <span class="platform-name">{pair.fediverse.name}</span>
           </div>
-        </div>
+        </article>
       ))}
     </div>
   </div>
 </section>
 
 <style>
-  .platforms-heading {
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    font-weight: 900;
-    letter-spacing: -0.03em;
-    line-height: 1.15;
-    margin-bottom: 1rem;
-  }
-
-  .platforms-sub {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    font-weight: 300;
-    line-height: 1.8;
-    margin-bottom: 3.5rem;
-    max-width: 500px;
-  }
-
-  .platforms-grid {
+  .platforms-header {
+    position: relative;
+    z-index: 1;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 1.2rem;
+    align-items: start;
   }
 
-  .platform-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.5rem 2rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    transition: all 0.4s;
-    position: relative;
-    overflow: hidden;
+  .platforms-note {
+    padding: 1.3rem;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 251, 245, 0.74);
+    border: 1px solid rgba(88, 69, 45, 0.12);
+    color: var(--text-soft);
+    line-height: 1.8;
   }
 
-  .platform-row::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0;
-    transition: opacity 0.4s;
-    background: radial-gradient(ellipse at 70% 50%, var(--glow-indigo), transparent 70%);
-    pointer-events: none;
-  }
-
-  .platform-row:hover::before { opacity: 1; }
-  .platform-row:hover {
-    border-color: var(--border-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  }
-
-  .platform-card {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    flex: 1;
-    position: relative;
-    z-index: 1;
-  }
-
-  .platform-logo {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    position: relative;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: all 0.3s;
-  }
-
-  .platform-row:hover .fediverse .platform-logo {
-    box-shadow: 0 0 20px color-mix(in srgb, var(--logo-color) 30%, transparent);
-    border-color: color-mix(in srgb, var(--logo-color) 40%, transparent);
-  }
-
-  .platform-initial {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--text-secondary);
-    transition: color 0.3s;
-  }
-
-  .fediverse .platform-initial {
-    color: var(--logo-color, var(--violet));
-  }
-
-  .platform-name {
-    font-size: 0.9rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    position: relative;
-    z-index: 1;
-  }
-
-  .mainstream .platform-name {
-    color: var(--text-secondary);
-  }
-
-  .fediverse .platform-name {
+  .platforms-note strong {
+    display: block;
+    margin-bottom: 0.5rem;
     color: var(--text);
   }
 
-  /* Arrow */
-  .platform-arrow {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    flex-shrink: 0;
-    width: 48px;
+  .platforms-grid {
     position: relative;
     z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
   }
 
-  .arrow-line {
-    flex: 1;
+  .platform-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr);
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.6rem 0.4rem;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 251, 245, 0.7);
+    border: 1px solid rgba(88, 69, 45, 0.12);
+  }
+
+  .platform-card {
+    min-height: 66px;
+    padding: 0.62rem 0.62rem;
+    border-radius: var(--radius-lg);
+    display: grid;
+    grid-template-columns: 2.35rem minmax(0, 1fr);
+    align-items: center;
+    column-gap: 0.75rem;
+    background: linear-gradient(180deg, rgba(255, 250, 242, 0.96), rgba(247, 239, 223, 0.96));
+    border: 1px solid rgba(88, 69, 45, 0.1);
+  }
+
+  .fediverse-card {
+    background: linear-gradient(180deg, rgba(216, 226, 216, 0.88), rgba(245, 236, 220, 0.96));
+  }
+
+  .platform-side {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .platform-copy {
+    display: grid;
+    gap: 0.08rem;
+    min-width: 0;
+    align-content: center;
+  }
+
+  .platform-card strong {
+    font-size: 0.88rem;
+    line-height: 1.1;
+  }
+
+  .platform-token {
+    width: 2.35rem;
+    height: 2.35rem;
+    display: grid;
+    place-items: center;
+    border-radius: var(--radius-md);
+    color: white;
+    background: var(--token);
+    border: 1px solid rgba(49, 66, 56, 0.08);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+  }
+
+  .platform-token[style*='#ffffff'],
+  .platform-token[style*='#FFffff'],
+  .platform-token[style*='#fff'],
+  .platform-token[style*='#FFF'] {
+    color: var(--text);
+    background: #f1f3ef;
+    border-color: rgba(49, 66, 56, 0.14);
+    box-shadow: inset 0 0 0 1px rgba(49, 66, 56, 0.04);
+  }
+
+  .platform-arrow {
+    display: grid;
+    place-items: center;
+  }
+
+  .platform-arrow span {
+    width: 100%;
     height: 1px;
-    background: linear-gradient(90deg, var(--text-dim), var(--violet));
     position: relative;
+    background: linear-gradient(90deg, rgba(88, 69, 45, 0.18), rgba(47, 90, 75, 0.5));
   }
 
-  .arrow-pulse {
+  .platform-arrow span::after {
+    content: '';
     position: absolute;
     top: 50%;
-    left: 0;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--violet);
-    transform: translateY(-50%);
-    opacity: 0;
-    animation: arrowPulse 2s ease-in-out infinite;
-    animation-delay: var(--delay, 0s);
+    right: 0;
+    width: 10px;
+    height: 10px;
+    border-top: 1px solid rgba(47, 90, 75, 0.7);
+    border-right: 1px solid rgba(47, 90, 75, 0.7);
+    transform: translateY(-50%) rotate(45deg);
   }
 
-  .arrow-head {
-    color: var(--violet);
-    flex-shrink: 0;
+  @media (max-width: 1000px) {
+    .platforms-header,
+    .platforms-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
-  @keyframes arrowPulse {
-    0% { left: 0; opacity: 0; }
-    20% { opacity: 0.8; }
-    80% { opacity: 0.8; }
-    100% { left: calc(100% - 8px); opacity: 0; }
-  }
+  @media (max-width: 640px) {
+    .platform-row {
+      grid-template-columns: 1fr;
+      padding: 0.6rem 0.35rem;
+      justify-items: center;
+    }
 
-  @media (prefers-reduced-motion: reduce) {
-    .arrow-pulse { animation: none; opacity: 0; }
-  }
+    .platform-arrow {
+      min-height: 32px;
+    }
 
-  /* Responsive */
-  @media (max-width: 768px) {
-    .platforms-grid { grid-template-columns: 1fr; }
-    .platform-row { padding: 1.2rem 1.5rem; }
-  }
+    .platform-arrow span {
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(88, 69, 45, 0.18), rgba(47, 90, 75, 0.5));
+    }
 
-  @media (max-width: 480px) {
-    .platforms-heading { font-size: 1.8rem; }
-    .platforms-sub { font-size: 0.9rem; margin-bottom: 2.5rem; }
-    .platform-row { padding: 1rem 1.2rem; gap: 0.6rem; }
-    .platform-logo { width: 36px; height: 36px; border-radius: 10px; }
-    .platform-initial { font-size: 0.65rem; }
-    .platform-name { font-size: 0.82rem; }
-    .platform-arrow { width: 32px; }
+    .platform-arrow span::after {
+      top: auto;
+      right: 50%;
+      bottom: 0;
+      transform: translateX(50%) rotate(135deg);
+    }
+
+    .platform-card {
+      min-height: auto;
+      grid-template-columns: 2.2rem minmax(0, 1fr);
+      column-gap: 0.7rem;
+      padding: 0.65rem 0.58rem;
+      width: min(100%, 20rem);
+    }
+
+    .platform-token {
+      width: 2.2rem;
+      height: 2.2rem;
+    }
   }
 </style>

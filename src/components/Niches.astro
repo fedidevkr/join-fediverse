@@ -1,142 +1,131 @@
 ---
 const niches = [
-  { icon: '🎨', label: '일러스트 · 창작', desc: '자기만의 세계를 그리는 아티스트들. 상업 알고리즘 없이, 작품 그 자체로 연결됩니다.', tags: ['pixiv 대안', '동인', '디지털아트'] },
-  { icon: '⌨️', label: '개발 · 테크', desc: '사이드 프로젝트, 오픈소스, 기술 토론. 조용하지만 깊이 있는 대화가 흐릅니다.', tags: ['오픈소스', '블로그', '프로그래밍'] },
-  { icon: '🐾', label: '퍼리 · 서브컬처', desc: '퍼소나를 만들고, 아트를 나누고, 같은 감성의 사람들과 어울리는 아지트.', tags: ['퍼리', '퍼소나', '커뮤니티'] },
-  { icon: '✍️', label: '글쓰기 · 블로깅', desc: '생각을 글로 정리하고 나누는 사람들. 짧은 포스트부터 긴 에세이까지.', tags: ['에세이', '일기', 'WriteFreely'] },
-  { icon: '📸', label: '사진 · 영상', desc: '인스타그램 없이도 작품을 공유할 수 있는 곳. 피드는 시간순, 좋아요 수는 비공개.', tags: ['Pixelfed', 'PeerTube', '포토그래피'] },
-  { icon: '🎵', label: '음악 · 사운드', desc: '자작곡, 커버, 플레이리스트. 좋아하는 음악 취향으로 느슨하게 이어지는 관계.', tags: ['Funkwhale', 'DTM', '큐레이션'] },
+  { icon: '🎨', label: '일러스트 · 창작', desc: '상업 플랫폼의 속도보다 작업의 결을 더 중요하게 여기는 사람들. 작품과 제작 과정을 길게 나눌 수 있습니다.', tags: ['팬덤', '디지털아트', '커미션'] },
+  { icon: '⌨️', label: '개발 · 테크', desc: '제품 링크보다 생각과 시행착오가 더 많이 오가는 공간. 글과 토론이 비교적 차분하게 축적됩니다.', tags: ['오픈소스', '개발블로그', '해커 문화'] },
+  { icon: '🐾', label: '퍼리 · 서브컬처', desc: '외부에선 설명이 길어지는 취향도 여기서는 기본 전제로 통합니다. 작은 공동체의 밀도가 강점입니다.', tags: ['퍼리', '오리지널 캐릭터', '행사 후기'] },
+  { icon: '✍️', label: '글쓰기 · 블로깅', desc: '짧은 감상부터 긴 에세이까지. 조회 수보다 읽는 사람의 분위기를 더 중요하게 둘 수 있습니다.', tags: ['에세이', '개인 블로그', '연재'] },
+  { icon: '📸', label: '사진 · 영상', desc: '이미지를 보기 좋게 정리하고, 반응 수보다 작업 맥락을 함께 남기기 좋은 환경이 있습니다.', tags: ['Pixelfed', 'PeerTube', '포트폴리오'] },
+  { icon: '🎵', label: '음악 · 사운드', desc: '만든 곡, 발견한 곡, 플레이리스트를 중심으로 천천히 연결됩니다. 추천 엔진보다 사람 큐레이션이 앞섭니다.', tags: ['자작곡', '플레이리스트', '소규모 씬'] },
 ];
 ---
 
 <section id="niches">
   <div class="section-inner">
     <div class="section-meta">
-      <span class="section-num">001</span>
+      <span class="section-num">01</span>
       <div class="section-rule"></div>
-      <span class="section-tag">DISCOVER</span>
+      <span class="section-tag">Communities by taste</span>
     </div>
-    <h2 class="niches-heading reveal">여기엔 이런 세계가 있습니다</h2>
-    <p class="niches-sub reveal">
-      연합우주에는 저마다의 색깔을 가진 공간들이 있습니다.<br />
-      알고리즘이 아닌, 취향으로 모인 사람들.
+
+    <h2 class="section-title reveal">먼저, 어떤 사람들이 모여 있는지 보세요.</h2>
+    <p class="section-copy reveal">
+      연합우주를 이해하는 가장 쉬운 방법은 기술 설명보다 분위기를 먼저 보는 것입니다.
+      여기서는 “다들 뭘 좋아하나요?”가 “여기는 어떤 앱인가요?”보다 더 좋은 질문입니다.
     </p>
+
     <div class="niches-grid stagger">
       {niches.map((niche) => (
-        <div class="niche-card">
-          <span class="niche-icon">{niche.icon}</span>
-          <div class="niche-label">{niche.label}</div>
-          <div class="niche-desc">{niche.desc}</div>
+        <article class="niche-card">
+          <div class="niche-top">
+            <span class="niche-icon" aria-hidden="true">{niche.icon}</span>
+            <h3>{niche.label}</h3>
+          </div>
+          <p>{niche.desc}</p>
           <div class="niche-tags">
             {niche.tags.map((tag) => (
-              <span class="niche-tag">{tag}</span>
+              <span>{tag}</span>
             ))}
           </div>
-        </div>
+        </article>
       ))}
     </div>
   </div>
 </section>
 
 <style>
-  .niches-heading {
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    font-weight: 900;
-    letter-spacing: -0.03em;
-    line-height: 1.15;
-    margin-bottom: 1rem;
-  }
-
-  .niches-sub {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    font-weight: 300;
-    line-height: 1.8;
-    margin-bottom: 3.5rem;
-    max-width: 500px;
-  }
-
   .niches-grid {
+    position: relative;
+    z-index: 1;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 2.2rem;
   }
 
   .niche-card {
-    background: var(--surface);
-    backdrop-filter: blur(8px);
-    padding: 2.2rem;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s;
-    cursor: default;
+    min-height: 250px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 251, 245, 0.78);
+    border: 1px solid rgba(88, 69, 45, 0.12);
+    box-shadow: 0 12px 30px rgba(74, 49, 18, 0.06);
   }
 
-  .niche-card:hover {
-    background: var(--surface-2);
+  .niche-top {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
   }
 
-  .niche-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0;
-    transition: opacity 0.4s;
-    pointer-events: none;
+  .niche-icon {
+    width: 3rem;
+    height: 3rem;
+    display: grid;
+    place-items: center;
+    border-radius: var(--radius-md);
+    background: linear-gradient(180deg, rgba(216, 226, 216, 0.78), rgba(255, 248, 238, 0.9));
+    font-size: 1.3rem;
   }
 
-  .niche-card:hover::before {
-    opacity: 1;
+  .niche-card h3 {
+    font-size: 1.12rem;
+    line-height: 1.35;
   }
 
-  .niche-card:nth-child(1)::before { background: radial-gradient(ellipse at 30% 80%, rgba(50, 140, 255, 0.1), transparent 70%); }
-  .niche-card:nth-child(2)::before { background: radial-gradient(ellipse at 50% 80%, rgba(255, 96, 144, 0.08), transparent 70%); }
-  .niche-card:nth-child(3)::before { background: radial-gradient(ellipse at 70% 80%, rgba(34, 211, 238, 0.1), transparent 70%); }
-  .niche-card:nth-child(4)::before { background: radial-gradient(ellipse at 30% 80%, rgba(128, 196, 255, 0.1), transparent 70%); }
-  .niche-card:nth-child(5)::before { background: radial-gradient(ellipse at 50% 80%, rgba(50, 140, 255, 0.08), transparent 70%); }
-  .niche-card:nth-child(6)::before { background: radial-gradient(ellipse at 70% 80%, rgba(255, 96, 144, 0.08), transparent 70%); }
-
-  .niche-icon { font-size: 1.8rem; margin-bottom: 1.2rem; display: block; }
-  .niche-label { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.6rem; }
-  .niche-desc { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7; font-weight: 300; }
-
-  .niche-tags { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 6px; }
-
-  .niche-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.6rem;
-    padding: 3px 10px;
-    border-radius: 10px;
-    border: 1px solid var(--border-hover);
-    color: var(--text-dim);
-    transition: all 0.3s;
+  .niche-card p {
+    color: var(--text-soft);
+    line-height: 1.8;
+    font-size: 0.95rem;
+    flex: 1;
   }
 
-  .niche-card:hover .niche-tag {
-    border-color: rgba(255, 255, 255, 0.15);
-    color: var(--text-secondary);
+  .niche-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-top: 1.3rem;
   }
 
-  @media (max-width: 768px) {
-    .niches-grid { grid-template-columns: repeat(2, 1fr); }
-    .niche-card { padding: 1.8rem; }
-    .niche-icon { font-size: 1.5rem; margin-bottom: 0.8rem; }
+  .niche-tags span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 0.35rem 0.8rem;
+    border-radius: var(--radius-md);
+    background: rgba(255, 251, 245, 0.92);
+    border: 1px solid rgba(88, 69, 45, 0.12);
+    color: var(--text-soft);
+    font-size: 0.82rem;
   }
 
-  @media (max-width: 480px) {
-    .niches-grid { grid-template-columns: 1fr; border-radius: 12px; }
-    .niches-heading { font-size: 1.8rem; }
-    .niches-sub { font-size: 0.9rem; margin-bottom: 2.5rem; }
-    .niche-card { padding: 1.5rem; }
-    .niche-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
-    .niche-label { font-size: 0.95rem; }
-    .niche-desc { font-size: 0.8rem; }
+  @media (max-width: 1000px) {
+    .niches-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .niches-grid {
+      grid-template-columns: 1fr;
+      margin-top: 1.6rem;
+    }
+
+    .niche-card {
+      min-height: auto;
+      padding: 1.2rem;
+    }
   }
 </style>
