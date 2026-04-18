@@ -1,151 +1,241 @@
 ---
-import instances from '../data/instances.json';
+const communities = [
+  {
+    klass: 'k-dev',
+    url: 'https://hackers.pub',
+    host: 'hackers.pub',
+    service: 'Hackers Pub',
+    desc: '코드와 시스템, 그 사이 생각들. 개발자들이 긴 글을 편하게 풀어놓는 공간.',
+    tags: ['#개발', '#에세이', '#devlog'],
+  },
+  {
+    klass: 'k-art',
+    url: 'https://oeee.cafe',
+    host: 'oeee.cafe',
+    service: 'Oeee',
+    desc: '그림 그리는 사람들의 공간. 낙서부터 완성작까지, 과정 공유와 피드백이 자연스럽게 오가요.',
+    tags: ['#일러스트', '#창작', '#과정공유'],
+  },
+  {
+    klass: 'k-sub',
+    url: 'https://kurry.social',
+    host: 'kurry.social',
+    service: 'Mastodon',
+    desc: '설명 없이도 통하는 취향이 전제인 퍼리 커뮤니티. 캐릭터·OC·행사 후기가 자주 오가요.',
+    tags: ['#퍼리', '#OC', '#서브컬처'],
+  },
+];
 ---
 
-<section id="instances">
-  <div class="section-inner-wide">
-    <div class="section-meta section-meta-padded">
-      <span class="section-num">05</span>
-      <div class="section-rule"></div>
-      <span class="section-tag">Pick a first home</span>
+<section id="communities">
+  <div class="wrap">
+    <span class="sec-eyebrow lilac">커뮤니티</span>
+    <h2 class="sec-h">
+      취향이 맞는<br /><span class="hl lilac">작은 공간</span>부터.
+    </h2>
+    <p class="sec-sub">
+      어디에 있느냐에 따라 분위기가 꽤 달라요. 큐레이션된 커뮤니티 중에서 마음에 드는 곳을
+      골라보세요.
+    </p>
+
+    <div class="comms">
+      {
+        communities.map((c) => (
+          <a href={c.url} target="_blank" rel="noopener" class={`comm ${c.klass}`}>
+            <div class="thumb">
+              <span class="thumb-tag">{c.service}</span>
+              <span class="thumb-users">
+                <span class="dot" />
+                활발
+              </span>
+            </div>
+            <h3>{c.host}</h3>
+            <div class="url">{c.host}</div>
+            <p class="desc">{c.desc}</p>
+            <div class="c-tags">
+              {c.tags.map((t) => (
+                <span class="c-tag">{t}</span>
+              ))}
+            </div>
+            <div class="c-foot">
+              <span class="go">
+                방문 <span class="arr">→</span>
+              </span>
+              <span class="svc">{c.service}</span>
+            </div>
+          </a>
+        ))
+      }
     </div>
 
-    <div class="instances-heading-row">
-      <div>
-        <h2 class="section-title reveal">
-          지금 들어가 볼 수 있는<br />
-          시작점.
-        </h2>
-        <p class="section-copy reveal">
-          완벽하게 맞는 곳을 처음부터 찾지 않아도 됩니다.
-          아래처럼 성격이 분명한 커뮤니티 하나를 고른 다음, 필요하면 천천히 넓혀가면 됩니다.
-        </p>
-      </div>
-
-      <a href="https://fedidev.kr" target="_blank" rel="noopener noreferrer" class="btn-inline instances-link">
-        더 많은 한국어 커뮤니티 보기
-      </a>
-    </div>
-
-    <div class="instances-grid stagger">
-      {instances.map((instance) => (
-        <a href={instance.url} target="_blank" rel="noopener noreferrer" class="instance-card">
-          <span class="instance-type">{instance.type}</span>
-          <h3>{instance.name}</h3>
-          <p class="instance-catch">{instance.catchphrase}</p>
-          <p class="instance-desc">{instance.description}</p>
-          <span class="instance-link">둘러보기</span>
-        </a>
-      ))}
+    <div class="more-cta">
+      <a href="/communities" class="btn btn-ghost">전체 커뮤니티 보기 <span class="arr">→</span></a>
     </div>
   </div>
 </section>
 
 <style>
-  .instances-heading-row {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-
-  .instances-link {
-    flex-shrink: 0;
-    color: var(--terracotta);
-  }
-
-  .instances-grid {
-    position: relative;
-    z-index: 1;
+  .comms {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-    margin-top: 2rem;
-    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 48px;
   }
-
-  .instance-card {
-    min-height: 320px;
-    width: 100%;
-    padding: 1.5rem;
+  .comm {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s,
+      border-color 0.2s;
     display: flex;
     flex-direction: column;
-    text-decoration: none;
-    border-radius: var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+  }
+  .comm:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 2px 4px rgba(15, 21, 18, 0.03),
+      0 24px 48px -24px rgba(15, 21, 18, 0.2);
+    border-color: var(--line-2);
+  }
+  .thumb {
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-sm);
+    margin-bottom: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .k-dev .thumb {
     background:
-      linear-gradient(180deg, rgba(255, 251, 245, 0.84), rgba(247, 239, 223, 0.92));
-    border: 1px solid rgba(88, 69, 45, 0.12);
-    box-shadow: 0 16px 30px rgba(74, 49, 18, 0.06);
+      radial-gradient(circle at 20% 30%, var(--mint) 0 40%, transparent 41%),
+      radial-gradient(circle at 80% 70%, var(--mint-soft) 0 45%, transparent 46%),
+      #e8f5ee;
+  }
+  .k-art .thumb {
+    background:
+      radial-gradient(circle at 70% 30%, var(--lilac) 0 38%, transparent 39%),
+      radial-gradient(circle at 20% 80%, #ffe8d8 0 45%, transparent 46%),
+      var(--lilac-soft);
+  }
+  .k-sub .thumb {
+    background:
+      radial-gradient(circle at 50% 50%, var(--coral) 0 20%, transparent 21%),
+      radial-gradient(circle at 15% 20%, var(--sun) 0 25%, transparent 26%),
+      #ffe8d8;
+  }
+  .thumb-tag {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 5px 10px;
+    background: white;
+    border-radius: var(--radius-pill);
+    color: var(--ink-2);
+  }
+  .thumb-users {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 5px 10px;
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: var(--radius-pill);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .thumb-users .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--mint);
   }
 
-  .instance-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 20px 34px rgba(74, 49, 18, 0.1);
-  }
-
-  .instance-type {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
-  .instance-card h3 {
-    margin-top: 1rem;
-    font-size: 1.34rem;
-    line-height: 1.2;
-  }
-
-  .instance-catch {
-    margin-top: 0.8rem;
-    font-size: 1.02rem;
+  .comm h3 {
+    font-size: 20px;
     font-weight: 700;
-    line-height: 1.55;
+    margin: 0 0 6px;
+    letter-spacing: -0.015em;
   }
-
-  .instance-desc {
-    margin-top: 0.9rem;
-    color: var(--text-soft);
-    line-height: 1.8;
-    font-size: 0.94rem;
+  .url {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-bottom: 12px;
+  }
+  .desc {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin-bottom: 16px;
     flex: 1;
   }
-
-  .instance-link {
-    margin-top: 1.3rem;
-    padding-top: 0.9rem;
-    border-top: 1px solid rgba(88, 69, 45, 0.12);
-    color: var(--sage);
-    font-weight: 700;
+  .c-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .c-tag {
+    font-size: 12px;
+    padding: 3px 9px;
+    border-radius: var(--radius-pill);
+    background: var(--bg-2);
+    color: var(--ink-2);
+  }
+  .c-foot {
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+  }
+  .go {
+    font-weight: 500;
+    color: var(--ink);
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .arr {
+    transition: transform 0.15s;
+  }
+  .comm:hover .arr {
+    transform: translateX(3px);
+  }
+  .svc {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
   }
 
-  @media (max-width: 1000px) {
-    .instances-heading-row,
-    .instances-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .instances-heading-row {
-      display: grid;
-      align-items: start;
-    }
-
-    .instances-link {
-      justify-self: start;
-    }
+  .more-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 36px;
   }
 
-  @media (max-width: 900px) {
-    .instances-grid {
-      grid-template-columns: 1fr;
-      justify-items: stretch;
+  @media (max-width: 1024px) {
+    .comms {
+      grid-template-columns: repeat(2, 1fr);
     }
-
-    .instance-card {
-      min-height: auto;
+  }
+  @media (max-width: 720px) {
+    .comms {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .comm {
+      padding: 18px;
     }
   }
 </style>

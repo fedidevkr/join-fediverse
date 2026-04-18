@@ -3,45 +3,24 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
 import Niches from '../components/Niches.astro';
+import Communities from '../components/Communities.astro';
+import HowItWorks from '../components/HowItWorks.astro';
 import Platforms from '../components/Platforms.astro';
 import Possibilities from '../components/Possibilities.astro';
-import HowItWorks from '../components/HowItWorks.astro';
-import Communities from '../components/Communities.astro';
+import FAQ from '../components/FAQ.astro';
+import FinalCTA from '../components/FinalCTA.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="연합우주 — 소셜 미디어의 다른 가능성">
+<Layout title="연합우주 — 작은 공동체들의 소셜 네트워크">
   <Nav />
-  <main class="site-main">
-    <Hero />
-    <div class="holo-divider"></div>
-    <Niches />
-    <div class="holo-divider"></div>
-    <Platforms />
-    <div class="holo-divider"></div>
-    <Possibilities />
-    <div class="holo-divider"></div>
-    <HowItWorks />
-    <div class="holo-divider"></div>
-    <Communities />
-    <div class="holo-divider"></div>
-    <Footer />
-  </main>
+  <Hero />
+  <Niches />
+  <Communities />
+  <HowItWorks />
+  <Platforms />
+  <Possibilities />
+  <FAQ />
+  <FinalCTA />
+  <Footer />
 </Layout>
-
-<script>
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
-
-  document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger').forEach((el) => {
-    observer.observe(el);
-  });
-</script>

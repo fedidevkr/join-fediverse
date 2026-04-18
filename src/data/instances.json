@@ -1,23 +1,101 @@
 [
   {
-    "name": "hackers.pub",
+    "host": "hackers.pub",
     "url": "https://hackers.pub",
-    "type": "BLOG",
-    "catchphrase": "개발자들의 열린 블로그",
-    "description": "소프트웨어 엔지니어와 개발자들이 모이는 인스턴스. 기술 이야기, 프로젝트 공유, 업계 이야기를 나눕니다."
+    "software": "Hackers Pub",
+    "category": "dev",
+    "categoryLabel": "개발 · 에세이",
+    "tags": ["#개발", "#에세이", "#devlog"],
+    "description": "코드와 시스템, 그 사이 생각들. 개발자들이 긴 글을 편하게 풀어놓는 공간.",
+    "users": 800,
+    "featured": true
   },
   {
-    "name": "oeee.cafe",
+    "host": "social.silicon.moe",
+    "url": "https://social.silicon.moe",
+    "software": "Mastodon",
+    "category": "dev",
+    "categoryLabel": "IT · 전자공학",
+    "tags": ["#IT", "#전자공학", "#CS"],
+    "description": "SiliconForest 커뮤니티가 운영하는 IT·전자공학 중심 Mastodon 서버. 전자쟁이·CS쟁이 환영.",
+    "users": 583,
+    "featured": false
+  },
+  {
+    "host": "oeee.cafe",
     "url": "https://oeee.cafe",
-    "type": "GALLERY",
-    "catchphrase": "니치한 감성의 아틀리에",
-    "description": "니치한 감성의 그림 작가들이 모이는 작은 커뮤니티. 독특한 취향의 그림들을 만날 수 있습니다."
+    "software": "Oeee",
+    "category": "art",
+    "categoryLabel": "일러스트 · 창작",
+    "tags": ["#일러스트", "#창작", "#과정공유"],
+    "description": "그림 그리는 사람들의 공간. 낙서부터 완성작까지, 과정 공유와 피드백이 자연스럽게 오가요.",
+    "users": null,
+    "featured": true
   },
   {
-    "name": "kurry.social",
+    "host": "kurry.social",
     "url": "https://kurry.social",
-    "type": "MASTODON",
-    "catchphrase": "한국 퍼리들의 아지트",
-    "description": "한국 퍼리 커뮤니티를 위한 인스턴스. 퍼리 아트, 일상 이야기, 국내외 퍼리들과의 교류가 활발합니다."
+    "software": "Mastodon",
+    "category": "sub",
+    "categoryLabel": "퍼리 · 서브컬처",
+    "tags": ["#퍼리", "#OC", "#서브컬처"],
+    "description": "설명 없이도 통하는 취향이 전제인 퍼리 커뮤니티. 캐릭터·OC·행사 후기가 자주 오가요.",
+    "users": 1935,
+    "featured": true
+  },
+  {
+    "host": "ani.work",
+    "url": "https://ani.work",
+    "software": "Mastodon",
+    "category": "sub",
+    "categoryLabel": "애니메이션",
+    "tags": ["#애니메이션", "#감상", "#서브컬처"],
+    "description": "애니메이션 이야기를 나누는 Mastodon 서버 'Aniwork Network'. 전 세계 애니메이션을 환영합니다.",
+    "users": 2528,
+    "featured": false
+  },
+  {
+    "host": "planet.moe",
+    "url": "https://planet.moe",
+    "software": "Mastodon",
+    "category": "general",
+    "categoryLabel": "종합",
+    "tags": ["#종합", "#일상", "#덕질"],
+    "description": "한국어 사용자가 폭넓게 머무는 종합 Mastodon 서버. 주제 제약이 없고 규모가 커 네트워크 구축이 쉬워요.",
+    "users": 39674,
+    "featured": false
+  },
+  {
+    "host": "uri.life",
+    "url": "https://uri.life",
+    "software": "Mastodon",
+    "category": "general",
+    "categoryLabel": "안식처 · 한국어",
+    "tags": ["#안식처", "#한국어", "#자유주제"],
+    "description": "다툼과 차별, 혐오에 지친 사람들을 위한 한국어 안식처 Mastodon 서버. 이름 그대로 '우리.인생'.",
+    "users": 4452,
+    "featured": false
+  },
+  {
+    "host": "buttersc.one",
+    "url": "https://buttersc.one",
+    "software": "Misskey",
+    "category": "general",
+    "categoryLabel": "자유 주제",
+    "tags": ["#일상", "#Misskey", "#자유주제"],
+    "description": "개인이 운영하는 자유 주제 Misskey 서버 '버터스콘'. 피로감 없는 SNS를 지향하며 2022년부터 운영 중.",
+    "users": 2585,
+    "featured": false
+  },
+  {
+    "host": "town.voyager.blue",
+    "url": "https://town.voyager.blue",
+    "software": "Mastodon",
+    "category": "general",
+    "categoryLabel": "자유 주제",
+    "tags": ["#자유주제", "#일상", "#Mastodon"],
+    "description": "자유 주제로 이야기하는 한국어 Mastodon 서버. '페일 블루 보이저 네트워크'.",
+    "users": 232,
+    "featured": false
   }
 ]

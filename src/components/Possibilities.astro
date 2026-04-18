@@ -1,103 +1,238 @@
 ---
-const items = [
+const steps = [
   {
     num: '01',
-    title: '피드를 내가 고릅니다',
-    body: '무엇을 더 보게 할지 결정하는 기준이 광고 상품이나 체류 시간 최적화가 아닙니다. 팔로우와 취향이 전면에 옵니다.',
+    title: '커뮤니티 고르기',
+    body: '위 커뮤니티 중 분위기가 맞는 곳을 하나 고르세요. "여기 사람들과 이야기하고 싶은가"가 기준이에요.',
   },
   {
     num: '02',
-    title: '공동체의 온도가 다릅니다',
-    body: '서버마다 운영자와 규칙, 금지되는 분위기, 환영받는 문화가 다릅니다. 그래서 “어디에 있느냐”가 꽤 중요합니다.',
+    title: '가입하기',
+    body: '이메일과 사용자명만 있으면 시작할 수 있어요. 한 곳 가입으로 전체 연합우주와 연결됩니다.',
   },
   {
     num: '03',
-    title: '옮겨도 관계가 남습니다',
-    body: '마음에 들지 않으면 다른 공간으로 이동할 수 있고, 중앙 회사 하나가 전체를 닫아버리는 구조도 아닙니다.',
+    title: '팔로우하기',
+    body: '관심 있는 해시태그와 사람부터 팔로우. 짧은 자기 소개 글이 가벼운 첫 게시물로 좋아요.',
   },
 ];
 ---
 
-<section id="possibilities">
-  <div class="section-inner">
-    <div class="section-meta">
-      <span class="section-num">03</span>
-      <div class="section-rule"></div>
-      <span class="section-tag">Why people stay</span>
-    </div>
-
-    <h2 class="section-title reveal">
-      여기가 단지 “대안” 이상인 이유.
+<section id="start">
+  <div class="wrap">
+    <span class="sec-eyebrow lilac">시작하기</span>
+    <h2 class="sec-h">
+      세 단계면<br /><span class="hl lilac">충분해요</span>.
     </h2>
-    <p class="section-copy reveal">
-      연합우주의 장점은 기능 목록보다 구조에서 나옵니다.
-      일단 적응하고 나면 더 조용하고, 덜 조급하고, 오래 쓰기 좋다는 이야기가 반복됩니다.
-    </p>
+    <p class="sec-sub">처음부터 완벽한 서버를 고르지 않아도 돼요. 언제든 옮길 수 있으니까요.</p>
 
-    <div class="possibility-grid stagger">
-      {items.map((item) => (
-        <article class="possibility-card">
-          <span class="possibility-num">{item.num}</span>
-          <h3>{item.title}</h3>
-          <p>{item.body}</p>
-        </article>
-      ))}
+    <div class="steps">
+      <div class="step">
+        <div class="snum">{steps[0].num}</div>
+        <h4>{steps[0].title}</h4>
+        <p>{steps[0].body}</p>
+
+        <div class="mockup">
+          <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="커뮤니티 선택 화면">
+            <rect width="400" height="250" fill="#F6F6F2"/>
+            <rect width="400" height="30" fill="#EFEFEA"/>
+            <line x1="0" y1="30" x2="400" y2="30" stroke="rgba(15,21,18,0.1)" />
+            <circle cx="14" cy="15" r="4" fill="#FF8A6B"/>
+            <circle cx="28" cy="15" r="4" fill="#FFD166"/>
+            <circle cx="42" cy="15" r="4" fill="#7EE3B8"/>
+            <text x="60" y="19" font-family="JetBrains Mono,monospace" font-size="10" fill="#5A615D">joinfediverse.kr</text>
+
+            <g>
+              <rect x="14" y="44" width="372" height="56" rx="12" fill="#E2F3EA" stroke="#0F6B4C" stroke-width="1.3"/>
+              <circle cx="40" cy="72" r="15" fill="#CEF2DF"/>
+              <text x="40" y="77" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#0F6B4C">H</text>
+              <text x="64" y="68" font-family="Pretendard,sans-serif" font-size="13" font-weight="600" fill="#0F1512">hackers.pub</text>
+              <text x="64" y="84" font-family="JetBrains Mono,monospace" font-size="10" fill="#5A615D">개발 · 에세이</text>
+              <circle cx="368" cy="72" r="10" fill="#0F6B4C"/>
+              <path d="M 363 72 L 367 76 L 374 67" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+
+            <g>
+              <rect x="14" y="108" width="372" height="56" rx="12" fill="white" stroke="rgba(15,21,18,0.1)"/>
+              <circle cx="40" cy="136" r="15" fill="#EBE4FA"/>
+              <text x="40" y="141" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#5B3DBF">O</text>
+              <text x="64" y="132" font-family="Pretendard,sans-serif" font-size="13" font-weight="600" fill="#0F1512">oeee.cafe</text>
+              <text x="64" y="148" font-family="JetBrains Mono,monospace" font-size="10" fill="#5A615D">일러스트 · 창작</text>
+              <circle cx="368" cy="136" r="9" fill="none" stroke="rgba(15,21,18,0.2)" stroke-width="1.4"/>
+            </g>
+
+            <g>
+              <rect x="14" y="172" width="372" height="56" rx="12" fill="white" stroke="rgba(15,21,18,0.1)"/>
+              <circle cx="40" cy="200" r="15" fill="#FFE0D0"/>
+              <text x="40" y="205" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="13" font-weight="700" fill="#B54020">K</text>
+              <text x="64" y="196" font-family="Pretendard,sans-serif" font-size="13" font-weight="600" fill="#0F1512">kurry.social</text>
+              <text x="64" y="212" font-family="JetBrains Mono,monospace" font-size="10" fill="#5A615D">퍼리 · 서브컬처</text>
+              <circle cx="368" cy="200" r="9" fill="none" stroke="rgba(15,21,18,0.2)" stroke-width="1.4"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum">{steps[1].num}</div>
+        <h4>{steps[1].title}</h4>
+        <p>{steps[1].body}</p>
+
+        <div class="mockup">
+          <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="가입 폼 화면">
+            <rect width="400" height="250" fill="#F6F6F2"/>
+            <rect width="400" height="30" fill="#EFEFEA"/>
+            <line x1="0" y1="30" x2="400" y2="30" stroke="rgba(15,21,18,0.1)" />
+            <circle cx="14" cy="15" r="4" fill="#FF8A6B"/>
+            <circle cx="28" cy="15" r="4" fill="#FFD166"/>
+            <circle cx="42" cy="15" r="4" fill="#7EE3B8"/>
+            <text x="60" y="19" font-family="JetBrains Mono,monospace" font-size="10" fill="#5A615D">joinfediverse.kr/signup</text>
+
+            <text x="20" y="60" font-family="Pretendard,sans-serif" font-size="16" font-weight="700" fill="#0F1512">계정 만들기</text>
+
+            <text x="20" y="86" font-family="JetBrains Mono,monospace" font-size="9" fill="#5A615D" letter-spacing="0.5">사용자명</text>
+            <rect x="20" y="92" width="360" height="36" rx="10" fill="white" stroke="rgba(15,21,18,0.15)"/>
+            <text x="32" y="115" font-family="Pretendard,sans-serif" font-size="13" font-weight="500" fill="#0F1512">minji</text>
+            <rect x="62" y="103" width="1.4" height="16" fill="#5B3DBF">
+              <animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.5;0.5;1;1" dur="1s" repeatCount="indefinite"/>
+            </rect>
+
+            <text x="20" y="150" font-family="JetBrains Mono,monospace" font-size="9" fill="#5A615D" letter-spacing="0.5">이메일</text>
+            <rect x="20" y="156" width="360" height="36" rx="10" fill="white" stroke="rgba(15,21,18,0.15)"/>
+            <text x="32" y="179" font-family="Pretendard,sans-serif" font-size="13" font-weight="500" fill="#0F1512">minji@example.com</text>
+
+            <rect x="256" y="206" width="124" height="32" rx="16" fill="#0F1512"/>
+            <text x="318" y="226" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="12" font-weight="500" fill="#F6F6F2">계정 만들기 →</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum">{steps[2].num}</div>
+        <h4>{steps[2].title}</h4>
+        <p>{steps[2].body}</p>
+
+        <div class="mockup">
+          <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="팔로우 화면">
+            <rect width="400" height="250" fill="#F6F6F2"/>
+            <rect width="400" height="30" fill="#EFEFEA"/>
+            <line x1="0" y1="30" x2="400" y2="30" stroke="rgba(15,21,18,0.1)" />
+            <circle cx="14" cy="15" r="4" fill="#FF8A6B"/>
+            <circle cx="28" cy="15" r="4" fill="#FFD166"/>
+            <circle cx="42" cy="15" r="4" fill="#7EE3B8"/>
+            <text x="60" y="19" font-family="JetBrains Mono,monospace" font-size="10" fill="#5A615D">joinfediverse.kr/explore</text>
+
+            <g font-family="JetBrains Mono,monospace" font-size="10">
+              <rect x="14" y="44" width="68" height="22" rx="11" fill="#EFEFEA"/>
+              <text x="48" y="59" text-anchor="middle" fill="#2A2F2C">#devlog</text>
+              <rect x="88" y="44" width="76" height="22" rx="11" fill="#EFEFEA"/>
+              <text x="126" y="59" text-anchor="middle" fill="#2A2F2C">#일러스트</text>
+              <rect x="170" y="44" width="60" height="22" rx="11" fill="#EFEFEA"/>
+              <text x="200" y="59" text-anchor="middle" fill="#2A2F2C">#독서</text>
+            </g>
+
+            <g>
+              <rect x="14" y="78" width="372" height="48" rx="12" fill="white" stroke="rgba(15,21,18,0.1)"/>
+              <circle cx="36" cy="102" r="13" fill="#CEF2DF"/>
+              <text x="36" y="107" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="700" fill="#0F6B4C">민</text>
+              <text x="58" y="99" font-family="Pretendard,sans-serif" font-size="12" font-weight="600" fill="#0F1512">민지</text>
+              <text x="58" y="115" font-family="JetBrains Mono,monospace" font-size="9" fill="#5A615D">@minji@hackers.pub</text>
+              <rect x="310" y="90" width="66" height="24" rx="12" fill="#CEF2DF"/>
+              <text x="343" y="106" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="10" font-weight="500" fill="#0F6B4C">팔로잉</text>
+            </g>
+
+            <g>
+              <rect x="14" y="134" width="372" height="48" rx="12" fill="white" stroke="rgba(15,21,18,0.1)"/>
+              <circle cx="36" cy="158" r="13" fill="#EBE4FA"/>
+              <text x="36" y="163" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="700" fill="#5B3DBF">준</text>
+              <text x="58" y="155" font-family="Pretendard,sans-serif" font-size="12" font-weight="600" fill="#0F1512">준호</text>
+              <text x="58" y="171" font-family="JetBrains Mono,monospace" font-size="9" fill="#5A615D">@jun@oeee.cafe</text>
+              <rect x="310" y="146" width="66" height="24" rx="12" fill="#0F1512"/>
+              <text x="343" y="162" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="10" font-weight="500" fill="#F6F6F2">+ 팔로우</text>
+            </g>
+
+            <g>
+              <rect x="14" y="190" width="372" height="48" rx="12" fill="white" stroke="rgba(15,21,18,0.1)"/>
+              <circle cx="36" cy="214" r="13" fill="#FFE0D0"/>
+              <text x="36" y="219" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11" font-weight="700" fill="#B54020">현</text>
+              <text x="58" y="211" font-family="Pretendard,sans-serif" font-size="12" font-weight="600" fill="#0F1512">현수</text>
+              <text x="58" y="227" font-family="JetBrains Mono,monospace" font-size="9" fill="#5A615D">@hyun@kurry.social</text>
+              <rect x="310" y="202" width="66" height="24" rx="12" fill="#0F1512"/>
+              <text x="343" y="218" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="10" font-weight="500" fill="#F6F6F2">+ 팔로우</text>
+            </g>
+          </svg>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .possibility-grid {
-    position: relative;
-    z-index: 1;
+  .steps {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-    margin-top: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    position: relative;
+    margin-top: 48px;
   }
-
-  .possibility-card {
-    padding: 1.6rem;
-    border-radius: var(--radius-lg);
-    background:
-      linear-gradient(180deg, rgba(255, 251, 245, 0.82), rgba(247, 239, 223, 0.88));
-    border: 1px solid rgba(88, 69, 45, 0.12);
-    min-height: 250px;
+  .step {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 26px 26px;
+    display: flex;
+    flex-direction: column;
   }
-
-  .possibility-num {
+  .snum {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    margin-bottom: 1rem;
-    border-radius: 50%;
-    background: rgba(47, 90, 75, 0.1);
-    color: var(--sage);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.78rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--ink);
+    color: var(--bg);
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 18px;
   }
-
-  .possibility-card h3 {
-    font-size: 1.24rem;
-    line-height: 1.35;
-    margin-bottom: 0.7rem;
+  .step h4 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 10px;
+    letter-spacing: -0.015em;
   }
-
-  .possibility-card p {
-    color: var(--text-soft);
-    line-height: 1.85;
-    font-size: 0.95rem;
+  .step p {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin: 0 0 18px;
   }
-
-  @media (max-width: 900px) {
-    .possibility-grid {
+  .mockup {
+    margin-top: auto;
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    background: var(--bg);
+    box-shadow: inset 0 0 0 1px rgba(15, 21, 18, 0.02);
+  }
+  .mockup svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  @media (max-width: 1024px) {
+    .steps {
       grid-template-columns: 1fr;
     }
-
-    .possibility-card {
-      min-height: auto;
+  }
+  @media (max-width: 720px) {
+    .steps {
+      gap: 14px;
+    }
+    .step {
+      padding: 22px 20px;
     }
   }
 </style>

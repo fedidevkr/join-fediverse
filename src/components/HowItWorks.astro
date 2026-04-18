@@ -1,78 +1,91 @@
 ---
-const platforms = [
-  { name: 'Mastodon', logo: '/images/logos/fediverse/mastodon.svg', tone: 'mastodon' },
-  { name: 'Pixelfed', logo: '/images/logos/fediverse/pixelfed.svg', tone: 'pixelfed' },
-  { name: 'WriteFreely', logo: '/images/logos/fediverse/writefreely.svg', tone: 'writefreely' },
-  { name: 'Misskey', logo: '/images/logos/fediverse/misskey.svg', tone: 'misskey' },
-  { name: 'PeerTube', logo: '/images/logos/fediverse/peertube.svg', tone: 'peertube' },
-];
-
-const steps = [
-  { title: '분위기를 고릅니다', body: '가입 전에 그 서버가 어떤 문화를 지향하는지 먼저 봅니다. 기술보다 분위기가 중요합니다.' },
-  { title: '하나의 계정으로 시작합니다', body: '딱 한 곳에 가입해도 충분합니다. 대부분의 상호작용은 그 한 계정에서 시작할 수 있습니다.' },
-  { title: '바깥과 이어집니다', body: '다른 서비스나 서버의 사람을 팔로우하고 답장하면서, 네트워크 바깥 경계가 옅어집니다.' },
-];
 ---
 
-<section id="concept">
-  <div class="section-inner">
-    <div class="section-meta">
-      <span class="section-num">04</span>
-      <div class="section-rule"></div>
-      <span class="section-tag">How it works</span>
-    </div>
+<section id="how">
+  <div class="wrap">
+    <div class="how">
+      <div class="how-grid">
+        <div class="diagram">
+          <svg class="wires" viewBox="0 0 400 400">
+            <path d="M 90 90 Q 200 130 310 95"></path>
+            <path d="M 310 95 Q 340 220 320 330"></path>
+            <path d="M 320 330 Q 200 360 110 330"></path>
+            <path d="M 110 330 Q 70 200 90 90"></path>
+            <path d="M 90 90 L 200 200"></path>
+            <path d="M 310 95 L 200 200"></path>
+            <path d="M 320 330 L 200 200"></path>
+            <path d="M 110 330 L 200 200"></path>
+            <circle cx="145" cy="155" r="3"></circle>
+            <circle cx="260" cy="160" r="3"></circle>
+            <circle cx="260" cy="260" r="3"></circle>
+            <circle cx="150" cy="255" r="3"></circle>
+          </svg>
 
-    <div class="concept-layout">
-      <div class="reveal-left">
-        <h2 class="section-title">작동 방식은 생각보다 단순합니다.</h2>
-        <p class="section-copy">
-          연합우주는 하나의 거대한 앱이 아니라, 서로 다른 서비스가 공통 프로토콜로 연결된 네트워크입니다.
-          블로그 서비스와 마이크로블로그, 사진 서비스가 완전히 같은 모양일 필요는 없지만,
-          서로 대화하고 구독할 수는 있습니다.
-        </p>
+          <div class="srv s1">
+            <b>hackers.pub</b>
+            <span>800 사용자</span>
+            <span class="pill">Hackers Pub</span>
+          </div>
+          <div class="srv s2">
+            <b>oeee.cafe</b>
+            <span>집계 비공개</span>
+            <span class="pill">Oeee</span>
+          </div>
+          <div class="srv s3">
+            <b>kurry.social</b>
+            <span>1,935 사용자</span>
+            <span class="pill">Mastodon</span>
+          </div>
+          <div class="srv s4">
+            <b>planet.moe</b>
+            <span>39,674 사용자</span>
+            <span class="pill">Mastodon</span>
+          </div>
 
-        <div class="concept-steps">
-          {steps.map((step, index) => (
-            <article class="concept-step">
-              <span>{String(index + 1).padStart(2, '0')}</span>
+          <div class="core">
+            <div>
+              <b>ActivityPub</b>
+              공통 프로토콜
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <span class="sec-eyebrow sun">원리</span>
+          <h2 class="sec-h">
+            작은 서버들이<br /><span class="hl">서로 이어져</span> 있어요.
+          </h2>
+          <p class="sec-sub">
+            각 서버는 독립적으로 운영돼요. 운영자도 규칙도 분위기도 다릅니다. 하지만 <b
+              >같은 프로토콜</b
+            >을 쓰기 때문에, 한 서버의 계정으로 다른 서버의 사람들을 팔로우하고 답장할 수 있어요.
+          </p>
+
+          <ul class="how-points">
+            <li>
+              <span class="n">01</span>
               <div>
-                <h3>{step.title}</h3>
-                <p>{step.body}</p>
+                <b>한 곳에 가입하면 충분</b>
+                <p>
+                  한 계정으로 다른 서버, 다른 앱(Pixelfed·PeerTube 등)의 사람들과 교류할 수 있어요.
+                </p>
               </div>
-            </article>
-          ))}
-        </div>
-      </div>
-
-      <div class="diagram reveal-scale" aria-label="연합우주 연결 방식 다이어그램">
-        <div class="diagram-grid"></div>
-        <div class="diagram-core">
-          <span>공통 프로토콜</span>
-          <div class="diagram-core-glyph" aria-hidden="true">
-            <svg viewBox="0 0 64 64" role="presentation">
-              <circle cx="32" cy="32" r="19"></circle>
-              <ellipse cx="32" cy="32" rx="9" ry="19"></ellipse>
-              <path d="M13 32h38"></path>
-              <path d="M17 22c4 2 9 3 15 3s11-1 15-3"></path>
-              <path d="M17 42c4-2 9-3 15-3s11 1 15 3"></path>
-            </svg>
-          </div>
-          <strong>ActivityPub</strong>
-        </div>
-
-        {platforms.map((platform, index) => (
-          <div class={`diagram-node ${platform.tone} node-${index + 1}`}>
-            <img src={platform.logo} alt={platform.name} width="36" height="36" />
-            <span class="sr-only">{platform.name}</span>
-          </div>
-        ))}
-
-        <div class="diagram-lines" aria-hidden="true">
-          <span class="line line-1"></span>
-          <span class="line line-2"></span>
-          <span class="line line-3"></span>
-          <span class="line line-4"></span>
-          <span class="line line-5"></span>
+            </li>
+            <li>
+              <span class="n lilac">02</span>
+              <div>
+                <b>서버는 작은 공동체</b>
+                <p>관심사나 언어, 분위기가 맞는 곳을 고르면 돼요. 마음에 안 들면 옮기면 됩니다.</p>
+              </div>
+            </li>
+            <li>
+              <span class="n sun">03</span>
+              <div>
+                <b>옮겨도 관계가 남아요</b>
+                <p>서버 이사 기능이 기본. 팔로우 관계가 함께 따라옵니다.</p>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -80,307 +93,217 @@ const steps = [
 </section>
 
 <style>
-  .concept-layout {
-    position: relative;
-    z-index: 1;
+  .how {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    padding: 56px;
+  }
+  .how-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.92fr);
-    gap: 1.5rem;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 56px;
     align-items: center;
-  }
-
-  .concept-steps {
-    display: grid;
-    gap: 0.9rem;
-    margin-top: 2rem;
-  }
-
-  .concept-step {
-    display: grid;
-    grid-template-columns: 48px 1fr;
-    gap: 1rem;
-    padding: 1rem 1.1rem;
-    border-radius: var(--radius-lg);
-    background: rgba(255, 251, 245, 0.74);
-    border: 1px solid rgba(88, 69, 45, 0.12);
-  }
-
-  .concept-step span {
-    width: 48px;
-    height: 48px;
-    display: grid;
-    place-items: center;
-    border-radius: var(--radius-md);
-    background: rgba(216, 226, 216, 0.64);
-    color: var(--sage);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.78rem;
-  }
-
-  .concept-step h3 {
-    font-size: 1.05rem;
-    margin-bottom: 0.4rem;
-  }
-
-  .concept-step p {
-    color: var(--text-soft);
-    line-height: 1.75;
-    font-size: 0.93rem;
   }
 
   .diagram {
     position: relative;
-    min-height: 500px;
-    border-radius: var(--radius-xl);
-    border: 1px solid rgba(88, 69, 45, 0.12);
-    background:
-      radial-gradient(circle at center, rgba(216, 226, 216, 0.6), transparent 24%),
-      linear-gradient(180deg, rgba(255, 251, 245, 0.82), rgba(247, 239, 223, 0.84));
-    overflow: hidden;
-  }
-
-  .diagram-grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(88, 69, 45, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(88, 69, 45, 0.06) 1px, transparent 1px);
-    background-size: 34px 34px;
-    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7), transparent 95%);
-  }
-
-  .diagram-core,
-  .diagram-node {
-    position: absolute;
-    z-index: 2;
-    display: grid;
-    place-items: center;
-    text-align: center;
-    background: rgba(255, 251, 245, 0.95);
-    border: 1px solid rgba(88, 69, 45, 0.12);
-    box-shadow: 0 14px 30px rgba(74, 49, 18, 0.08);
-  }
-
-  .diagram-core {
-    inset: 50% auto auto 50%;
-    width: 172px;
-    height: 172px;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background: linear-gradient(180deg, rgba(47, 90, 75, 0.98), rgba(33, 61, 51, 0.98));
-    color: #f8f3e7;
-    justify-items: center;
-    align-content: center;
-    text-align: center;
-  }
-
-  .diagram-core span {
-    font-size: 0.72rem;
-    opacity: 0.8;
-    letter-spacing: 0.04em;
-  }
-
-  .diagram-core-glyph {
-    width: 58px;
-    height: 58px;
-    margin: 0.35rem 0 0.45rem;
-  }
-
-  .diagram-core-glyph svg {
+    aspect-ratio: 1 / 1;
+    max-width: 480px;
+    margin: 0 auto;
     width: 100%;
-    height: 100%;
-    fill: none;
-    stroke: rgba(248, 243, 231, 0.92);
-    stroke-width: 2.2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
   }
-
-  .diagram-core strong {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.82rem;
-    line-height: 1.1;
-    letter-spacing: 0.02em;
-    text-transform: none;
-    word-break: normal;
-    overflow-wrap: normal;
-    opacity: 0.92;
-    text-align: center;
-  }
-
-  .diagram-node {
-    width: 84px;
-    height: 84px;
-    padding: 0;
-    border-radius: 50%;
-    gap: 0;
-    background: rgba(255, 251, 245, 0.98);
-  }
-
-  .diagram-node img {
-    width: 42px;
-    height: 42px;
-    object-fit: contain;
-  }
-
-  .sr-only {
+  .diagram .srv {
     position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+    width: 120px;
+    padding: 14px 14px 12px;
+    background: white;
+    border: 1px solid var(--line-2);
+    border-radius: var(--radius-sm);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.03),
+      0 12px 28px -16px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+  }
+  .diagram .srv b {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .diagram .srv span {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--ink-3);
+    margin-top: 2px;
+  }
+  .diagram .srv .pill {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: var(--radius-pill);
+  }
+  .s1 {
+    top: 6%;
+    left: 6%;
+  }
+  .s1 .pill {
+    background: var(--mint-soft);
+    color: var(--mint-deep);
+  }
+  .s2 {
+    top: 10%;
+    right: 6%;
+  }
+  .s2 .pill {
+    background: var(--lilac-soft);
+    color: var(--lilac-deep);
+  }
+  .s3 {
+    bottom: 10%;
+    left: 14%;
+  }
+  .s3 .pill {
+    background: #ffe8d8;
+    color: #b54020;
+  }
+  .s4 {
+    bottom: 6%;
+    right: 10%;
+  }
+  .s4 .pill {
+    background: color-mix(in oklab, var(--sun) 35%, white);
+    color: #7a5400;
   }
 
-  .node-1 {
-    top: calc(50% - 170px);
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .node-2 {
-    top: calc(50% - 92px);
-    left: calc(50% + 168px);
-    transform: translate(-50%, -50%);
-  }
-
-  .node-3 {
-    top: calc(50% + 132px);
-    left: calc(50% + 142px);
-    transform: translate(-50%, -50%);
-  }
-
-  .node-4 {
-    top: calc(50% + 132px);
-    left: calc(50% - 142px);
-    transform: translate(-50%, -50%);
-  }
-
-  .node-5 {
-    top: calc(50% - 92px);
-    left: calc(50% - 168px);
-    transform: translate(-50%, -50%);
-  }
-
-  .diagram-lines {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-  }
-
-  .line {
+  .core {
     position: absolute;
     top: 50%;
     left: 50%;
-    height: 1px;
-    transform-origin: left center;
-    background: linear-gradient(90deg, rgba(47, 90, 75, 0.72), rgba(47, 90, 75, 0));
+    transform: translate(-50%, -50%);
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--bg);
+    display: grid;
+    place-items: center;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    z-index: 3;
+    box-shadow: 0 20px 40px -20px rgba(15, 21, 18, 0.4);
+  }
+  .core b {
+    display: block;
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 2px;
+    color: white;
+  }
+  svg.wires {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+  svg.wires path {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 1.5;
+    stroke-dasharray: 4 5;
+    opacity: 0.35;
+  }
+  svg.wires circle {
+    fill: var(--mint-deep);
   }
 
-  .line-1 {
-    width: 130px;
-    transform: rotate(-90deg);
+  .how-points {
+    list-style: none;
+    padding: 0;
+    margin: 28px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .how-points li {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+  .how-points li .n {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: var(--mint-soft);
+    color: var(--mint-deep);
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    display: grid;
+    place-items: center;
+  }
+  .how-points li .n.lilac {
+    background: var(--lilac-soft);
+    color: var(--lilac-deep);
+  }
+  .how-points li .n.sun {
+    background: color-mix(in oklab, var(--sun) 35%, white);
+    color: #7a5400;
+  }
+  .how-points li b {
+    display: block;
+    font-size: 15.5px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    color: var(--ink);
+  }
+  .how-points li p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.6;
   }
 
-  .line-2 {
-    width: 168px;
-    transform: rotate(-28deg);
-  }
-
-  .line-3 {
-    width: 154px;
-    transform: rotate(38deg);
-  }
-
-  .line-4 {
-    width: 150px;
-    transform: rotate(142deg);
-  }
-
-  .line-5 {
-    width: 166px;
-    transform: rotate(208deg);
-  }
-
-  @media (max-width: 1000px) {
-    .concept-layout {
+  @media (max-width: 1024px) {
+    .how {
+      padding: 48px 36px;
+    }
+    .how-grid {
       grid-template-columns: 1fr;
+      gap: 48px;
     }
   }
-
-  @media (max-width: 640px) {
-    .concept-step {
-      grid-template-columns: 42px 1fr;
-      gap: 0.8rem;
-      padding: 0.9rem;
+  @media (max-width: 720px) {
+    .how {
+      padding: 36px 22px;
+      border-radius: 20px;
     }
-
-    .concept-step span {
-      width: 42px;
-      height: 42px;
-    }
-
     .diagram {
-      min-height: 430px;
-      border-radius: var(--radius-xl);
+      max-width: 340px;
     }
-
-    .diagram-core {
-      width: 128px;
-      height: 128px;
+    .diagram .srv {
+      width: 100px;
+      padding: 10px;
     }
-
-    .diagram-core-glyph {
-      width: 42px;
-      height: 42px;
-      margin: 0.2rem 0 0.3rem;
+    .diagram .srv b {
+      font-size: 12px;
     }
-
-    .diagram-core strong {
-      font-size: 0.68rem;
+    .core {
+      width: 110px;
+      height: 110px;
     }
-
-    .diagram-node {
-      width: 68px;
-      height: 68px;
+    .core b {
+      font-size: 14px;
     }
-
-    .diagram-node img {
-      width: 32px;
-      height: 32px;
-    }
-
-    .node-1 {
-      top: calc(50% - 124px);
-    }
-
-    .node-2 {
-      top: calc(50% - 74px);
-      left: calc(50% + 122px);
-    }
-
-    .node-3 {
-      top: calc(50% + 100px);
-      left: calc(50% + 102px);
-    }
-
-    .node-4 {
-      top: calc(50% + 100px);
-      left: calc(50% - 102px);
-    }
-
-    .node-5 {
-      top: calc(50% - 74px);
-      left: calc(50% - 122px);
-    }
-
-    .line-1 { width: 116px; }
-    .line-2 { width: 144px; }
-    .line-3 { width: 134px; }
-    .line-4 { width: 132px; }
-    .line-5 { width: 142px; }
   }
 </style>

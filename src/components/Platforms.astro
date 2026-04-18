@@ -1,226 +1,191 @@
 ---
-import platforms from '../data/platforms.json';
+const apps = [
+  {
+    logo: '/images/logos/fediverse/mastodon.svg',
+    iconBg: 'var(--lilac-soft)',
+    alt: '기존 → 트위터 / 스레드',
+    name: 'Mastodon',
+    desc: '짧은 글과 시간순 타임라인. 가장 많은 사용자가 모이는 서비스예요.',
+    host: 'mastodon.social',
+    tag: '가장 인기',
+    highlight: true,
+  },
+  {
+    logo: '/images/logos/fediverse/pixelfed.svg',
+    iconBg: '#FFE0D0',
+    alt: '기존 → 인스타그램',
+    name: 'Pixelfed',
+    desc: '이미지 중심의 피드. 작업 과정과 맥락이 자연스럽게 따라오는 갤러리.',
+    host: 'pixelfed.social',
+    tag: '이미지',
+  },
+  {
+    logo: '/images/logos/fediverse/peertube.svg',
+    iconBg: 'var(--mint-soft)',
+    alt: '기존 → 유튜브',
+    name: 'PeerTube',
+    desc: '채널 단위 독립 운영의 동영상 플랫폼. 서버마다 테마와 성격이 달라요.',
+    host: 'joinpeertube.org',
+    tag: '동영상',
+  },
+  {
+    logo: '/images/logos/fediverse/lemmy.svg',
+    iconBg: '#DCEAFE',
+    alt: '기존 → 레딧',
+    name: 'Lemmy',
+    desc: '주제별 커뮤니티 포럼. 분산된 서브레딧이라고 생각하면 편합니다.',
+    host: 'join-lemmy.org',
+    tag: '포럼',
+  },
+  {
+    logo: '/images/logos/fediverse/writefreely.svg',
+    iconBg: 'color-mix(in oklab, var(--sun) 45%, white)',
+    alt: '기존 → 브런치 / 미디엄',
+    name: 'WriteFreely',
+    desc: '담백한 블로그 플랫폼. 긴 글과 구독자 사이의 느슨한 연결.',
+    host: 'writefreely.org',
+    tag: '장문',
+  },
+  {
+    logo: '/images/logos/fediverse/hackerspub.svg',
+    iconBg: 'var(--mint-soft)',
+    alt: '기존 → velog / dev.to / zenn',
+    name: 'Hackers Pub',
+    desc: '개발자들을 위한 블로깅 플랫폼. 기술 에세이와 devlog가 연합우주 위에서 오갑니다.',
+    host: 'hackers.pub',
+    tag: '개발',
+  },
+  {
+    logo: '/images/logos/fediverse/misskey.svg',
+    iconBg: 'color-mix(in oklab, var(--mint) 30%, white)',
+    alt: '기존 → 트위터 / 스레드',
+    name: 'Misskey',
+    desc: '반응·이모지·노트 중심의 소셜. 커스텀 이모지와 가볍게 노는 문화가 강해요.',
+    host: 'misskey-hub.net',
+    tag: '소셜',
+  },
+];
 ---
 
-<section id="platforms">
-  <div class="section-inner">
-    <div class="section-meta">
-      <span class="section-num">02</span>
-      <div class="section-rule"></div>
-      <span class="section-tag">Familiar, but different</span>
-    </div>
+<section id="apps">
+  <div class="wrap">
+    <span class="sec-eyebrow">앱과 서비스</span>
+    <h2 class="sec-h">
+      내가 쓰던 것,<br />연합우주에도 <span class="hl">다 있어요</span>.
+    </h2>
+    <p class="sec-sub">같은 프로토콜을 쓰는 덕분에, 서로 다른 앱 사이에서도 팔로우와 답장이 가능합니다.</p>
 
-    <div class="platforms-header">
-      <div>
-        <h2 class="section-title reveal">익숙한 사용 방식은 남기고, 구조만 바꿉니다.</h2>
-        <p class="section-copy reveal">
-          사진은 사진답게, 글은 글답게, 짧은 대화는 짧은 대화답게 쓸 수 있습니다.
-          다만 한 회사 안에서 잠기지 않고, 서비스끼리 느슨하게 연결된다는 점이 다릅니다.
-        </p>
-      </div>
-      <aside class="platforms-note reveal-right">
-        <strong>중요한 차이</strong>
-        <p>대안을 찾는다는 말은 복제본을 찾는다는 뜻이 아닙니다. 더 작은 문화와 다른 운영 철학까지 함께 고르는 일에 가깝습니다.</p>
-      </aside>
-    </div>
-
-    <div class="platforms-grid stagger">
-      {platforms.map((pair) => (
-        <article class="platform-row">
-          <div class="platform-card">
-            <span class="platform-token" style={`--token:${pair.mainstream.color}`}>{pair.mainstream.initial}</span>
-            <div class="platform-copy">
-              <strong>{pair.mainstream.name}</strong>
-              <span class="platform-side">익숙한 서비스</span>
+    <div class="apps-grid">
+      {
+        apps.map((a) => (
+          <div class="app-card">
+            <div class="icon" style={`background:${a.iconBg}`}>
+              <img src={a.logo} alt={a.name} width="36" height="36" loading="lazy" />
+            </div>
+            <div class="alt">{a.alt}</div>
+            <h4>{a.name}</h4>
+            <p>{a.desc}</p>
+            <div class="bottom">
+              <span>{a.host}</span>
+              <span class={a.highlight ? 'new' : ''}>{a.tag}</span>
             </div>
           </div>
-          <div class="platform-arrow" aria-hidden="true">
-            <span></span>
-          </div>
-          <div class="platform-card fediverse-card">
-            <span class="platform-token" style={`--token:${pair.fediverse.color}`}>{pair.fediverse.initial}</span>
-            <div class="platform-copy">
-              <strong>{pair.fediverse.name}</strong>
-              <span class="platform-side">연합우주의 선택지</span>
-            </div>
-          </div>
-        </article>
-      ))}
+        ))
+      }
     </div>
   </div>
 </section>
 
 <style>
-  .platforms-header {
-    position: relative;
-    z-index: 1;
+  .apps-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 320px;
-    gap: 1.2rem;
-    align-items: start;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 48px;
   }
-
-  .platforms-note {
-    padding: 1.3rem;
-    border-radius: var(--radius-lg);
-    background: rgba(255, 251, 245, 0.74);
-    border: 1px solid rgba(88, 69, 45, 0.12);
-    color: var(--text-soft);
-    line-height: 1.8;
+  .app-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s,
+      border-color 0.2s;
   }
-
-  .platforms-note strong {
+  .app-card:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.03),
+      0 20px 40px -20px rgba(0, 0, 0, 0.18);
+    border-color: var(--line-2);
+  }
+  .icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    margin-bottom: 16px;
+    display: grid;
+    place-items: center;
+  }
+  .icon img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
     display: block;
-    margin-bottom: 0.5rem;
-    color: var(--text);
   }
-
-  .platforms-grid {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-
-  .platform-row {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr);
-    align-items: center;
-    gap: 0.7rem;
-    padding: 0.6rem 0.4rem;
-    border-radius: var(--radius-lg);
-    background: rgba(255, 251, 245, 0.7);
-    border: 1px solid rgba(88, 69, 45, 0.12);
-  }
-
-  .platform-card {
-    min-height: 66px;
-    padding: 0.62rem 0.62rem;
-    border-radius: var(--radius-lg);
-    display: grid;
-    grid-template-columns: 2.35rem minmax(0, 1fr);
-    align-items: center;
-    column-gap: 0.75rem;
-    background: linear-gradient(180deg, rgba(255, 250, 242, 0.96), rgba(247, 239, 223, 0.96));
-    border: 1px solid rgba(88, 69, 45, 0.1);
-  }
-
-  .fediverse-card {
-    background: linear-gradient(180deg, rgba(216, 226, 216, 0.88), rgba(245, 236, 220, 0.96));
-  }
-
-  .platform-side {
-    display: block;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.58rem;
-    letter-spacing: 0.12em;
+  .alt {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--text-muted);
   }
-
-  .platform-copy {
-    display: grid;
-    gap: 0.08rem;
-    min-width: 0;
-    align-content: center;
+  .app-card h4 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    letter-spacing: -0.015em;
   }
-
-  .platform-card strong {
-    font-size: 0.88rem;
-    line-height: 1.1;
+  .app-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    margin: 0 0 16px;
+    flex: 1;
   }
-
-  .platform-token {
-    width: 2.35rem;
-    height: 2.35rem;
-    display: grid;
-    place-items: center;
-    border-radius: var(--radius-md);
-    color: white;
-    background: var(--token);
-    border: 1px solid rgba(49, 66, 56, 0.08);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
   }
-
-  .platform-token[style*='#ffffff'],
-  .platform-token[style*='#FFffff'],
-  .platform-token[style*='#fff'],
-  .platform-token[style*='#FFF'] {
-    color: var(--text);
-    background: #f1f3ef;
-    border-color: rgba(49, 66, 56, 0.14);
-    box-shadow: inset 0 0 0 1px rgba(49, 66, 56, 0.04);
+  .bottom .new {
+    padding: 3px 8px;
+    border-radius: var(--radius-pill);
+    background: var(--mint-soft);
+    color: var(--mint-deep);
+    font-weight: 500;
   }
-
-  .platform-arrow {
-    display: grid;
-    place-items: center;
+  @media (max-width: 1024px) {
+    .apps-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
-
-  .platform-arrow span {
-    width: 100%;
-    height: 1px;
-    position: relative;
-    background: linear-gradient(90deg, rgba(88, 69, 45, 0.18), rgba(47, 90, 75, 0.5));
-  }
-
-  .platform-arrow span::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: 0;
-    width: 10px;
-    height: 10px;
-    border-top: 1px solid rgba(47, 90, 75, 0.7);
-    border-right: 1px solid rgba(47, 90, 75, 0.7);
-    transform: translateY(-50%) rotate(45deg);
-  }
-
-  @media (max-width: 1000px) {
-    .platforms-header,
-    .platforms-grid {
+  @media (max-width: 720px) {
+    .apps-grid {
       grid-template-columns: 1fr;
+      gap: 14px;
     }
-  }
-
-  @media (max-width: 640px) {
-    .platform-row {
-      grid-template-columns: 1fr;
-      padding: 0.6rem 0.35rem;
-      justify-items: center;
-    }
-
-    .platform-arrow {
-      min-height: 32px;
-    }
-
-    .platform-arrow span {
-      width: 1px;
-      height: 100%;
-      background: linear-gradient(180deg, rgba(88, 69, 45, 0.18), rgba(47, 90, 75, 0.5));
-    }
-
-    .platform-arrow span::after {
-      top: auto;
-      right: 50%;
-      bottom: 0;
-      transform: translateX(50%) rotate(135deg);
-    }
-
-    .platform-card {
-      min-height: auto;
-      grid-template-columns: 2.2rem minmax(0, 1fr);
-      column-gap: 0.7rem;
-      padding: 0.65rem 0.58rem;
-      width: min(100%, 20rem);
-    }
-
-    .platform-token {
-      width: 2.2rem;
-      height: 2.2rem;
+    .app-card {
+      padding: 20px;
     }
   }
 </style>

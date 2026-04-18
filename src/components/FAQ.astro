@@ -1,0 +1,143 @@
+---
+interface FaqItem {
+  q: string;
+  a: string;
+}
+interface Props {
+  items?: FaqItem[];
+  title?: string;
+  eyebrow?: string;
+}
+
+const defaultFaqs: FaqItem[] = [
+  {
+    q: '내가 가입한 서버가 문을 닫으면 어떻게 되나요?',
+    a: '대부분의 서비스는 계정 이사(migration) 기능이 있어서, 다른 서버로 옮길 때 팔로우 관계가 따라옵니다. 글과 미디어는 내 계정으로 내보내기가 가능하니, 서버 운영자가 중단을 예고하면 미리 옮기거나 백업할 수 있어요.',
+  },
+  {
+    q: '모더레이션은 어떻게 되나요?',
+    a: '서버마다 운영자와 운영 정책이 다릅니다. 각 서버의 규칙 페이지에 명시되고, 신고·차단 기능이 기본 제공돼요. 문제가 되는 다른 서버 전체를 차단하는 기능(서버 차단)도 있습니다.',
+  },
+  {
+    q: '누가 서버 비용을 내나요?',
+    a: '대부분 운영자의 자비 또는 사용자 후원(Patreon, OpenCollective 등)으로 유지됩니다. 광고 수익 모델이 없기 때문에, 서버가 오래 유지되려면 커뮤니티의 자발적 기여가 중요해요.',
+  },
+  {
+    q: '한 곳만 가입하면 충분한가요?',
+    a: '네. 한 서버의 한 계정으로 다른 서버, 다른 서비스(Pixelfed, PeerTube 등)의 사람을 팔로우하고 답장할 수 있어요. 여러 개 만들 필요는 없습니다.',
+  },
+  {
+    q: '사용자가 얼마나 있나요?',
+    a: '정확한 수치는 공개되지 않지만, 활성 커뮤니티가 여러 곳 운영되고 있으며 주제별로 수백~수천 명 단위의 사용자가 있어요. 가입 후 관심 해시태그를 팔로우하면 금방 흐름을 찾을 수 있습니다.',
+  },
+  {
+    q: 'ActivityPub가 뭔가요?',
+    a: '서로 다른 서버와 앱이 같은 방식으로 대화할 수 있게 해주는 오픈 프로토콜입니다. W3C 표준이며, Mastodon·Pixelfed·PeerTube 같은 서비스들이 이 위에서 작동해요. 이메일이 서로 다른 회사 간에도 주고받아지는 것과 비슷한 원리입니다.',
+  },
+];
+
+const { items = defaultFaqs, title = '궁금한 것들.', eyebrow = '자주 묻는 질문' } = Astro.props;
+---
+
+<section id="faq">
+  <div class="wrap">
+    <div class="faq-head">
+      <span class="sec-eyebrow">{eyebrow}</span>
+      <h2 class="sec-h">{title}</h2>
+    </div>
+    <div class="faqs">
+      {
+        items.map((f) => (
+          <details class="faq">
+            <summary>
+              {f.q}
+              <span class="mk">+</span>
+            </summary>
+            <p>{f.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-head {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .faq-head .sec-h {
+    margin: 0 auto;
+  }
+  .faqs {
+    max-width: 820px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .faq {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    transition: border-color 0.2s;
+  }
+  .faq[open] {
+    border-color: var(--line-2);
+  }
+  .faq summary {
+    font-weight: 600;
+    font-size: 16.5px;
+    color: var(--ink);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    letter-spacing: -0.01em;
+  }
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq summary .mk {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--bg-2);
+    display: grid;
+    place-items: center;
+    transition:
+      transform 0.2s,
+      background 0.2s;
+    font-size: 16px;
+    color: var(--ink-2);
+    flex-shrink: 0;
+  }
+  .faq[open] summary .mk {
+    transform: rotate(45deg);
+    background: var(--mint);
+    color: var(--ink);
+  }
+  .faq p {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    margin: 14px 0 0;
+    max-width: 62ch;
+  }
+  @media (max-width: 720px) {
+    .faq {
+      padding: 16px 18px;
+    }
+    .faq summary {
+      font-size: 15.5px;
+      gap: 12px;
+    }
+    .faq summary .mk {
+      width: 26px;
+      height: 26px;
+    }
+  }
+</style>

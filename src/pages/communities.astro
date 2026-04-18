@@ -1,0 +1,266 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import Footer from '../components/Footer.astro';
+import instances from '../data/instances.json';
+
+const categoryOrder = ['dev', 'art', 'sub', 'general'];
+const categoryLabels: Record<string, string> = {
+  dev: '개발 · 기술',
+  art: '일러스트 · 창작',
+  sub: '서브컬처',
+  general: '종합',
+};
+
+type Instance = (typeof instances)[number];
+const grouped = instances.reduce<Record<string, Instance[]>>((acc, item) => {
+  (acc[item.category] = acc[item.category] || []).push(item);
+  return acc;
+}, {});
+
+const fmt = (n: number | null) => (n == null ? '집계 비공개' : `${n.toLocaleString()} 사용자`);
+---
+
+<Layout
+  title="커뮤니티 디렉토리 — 연합우주"
+  description="nodeinfo 기반으로 확인한 한국어 연합우주 커뮤니티 디렉토리. 주제별로 선택할 수 있는 서버 목록."
+>
+  <Nav />
+
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="sec-eyebrow lilac">커뮤니티 디렉토리</span>
+      <h1 class="page-title">
+        한국어 커뮤니티, <span class="hl lilac">한 눈에</span>.
+      </h1>
+      <p class="page-lead">
+        각 서버의 <code>/.well-known/nodeinfo</code>에서 확인한 실제 사용자 수를 기반으로 정리했어요.
+        빠진 서버가 있다면 <a href="/contribute" class="ilink">기여하기</a>로 추가할 수 있습니다.
+      </p>
+    </div>
+  </section>
+
+  {
+    categoryOrder.map(
+      (cat) =>
+        grouped[cat] && (
+          <section class="cat-section">
+            <div class="wrap">
+              <div class="cat-head">
+                <h2 class="cat-title">{categoryLabels[cat]}</h2>
+                <span class="cat-count">{grouped[cat].length}곳</span>
+              </div>
+              <div class="dir-grid">
+                {grouped[cat].map((inst) => (
+                  <a href={inst.url} target="_blank" rel="noopener" class="inst-card">
+                    <div class="inst-head">
+                      <h3>{inst.host}</h3>
+                      <span class="software">{inst.software}</span>
+                    </div>
+                    <p class="inst-desc">{inst.description}</p>
+                    <div class="inst-tags">
+                      {inst.tags.map((t) => (
+                        <span class="tag">{t}</span>
+                      ))}
+                    </div>
+                    <div class="inst-foot">
+                      <span class="users">{fmt(inst.users)}</span>
+                      <span class="go">
+                        방문 <span class="arr">→</span>
+                      </span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        )
+    )
+  }
+
+  <FinalCTA
+    title="빠진 서버가 있나요?"
+    body="joinfediverse.kr의 커뮤니티 디렉토리는 공동의 문서예요. GitHub PR로 직접 추가하거나, 이슈로 제보해주세요."
+    primary={{ href: '/contribute', label: '기여하기' }}
+    secondary={{ href: '/faq', label: '더 궁금한 것이 있어요' }}
+  />
+  <Footer />
+</Layout>
+
+<style>
+  .page-hero {
+    padding: 96px 0 48px;
+  }
+  .page-title {
+    font-size: clamp(40px, 5.6vw, 72px);
+    line-height: 1.35;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    margin: 0 0 20px;
+    color: var(--ink);
+  }
+  .page-title .hl {
+    display: inline-block;
+    padding: 0 6px;
+    background: var(--mint);
+    border-radius: 8px;
+    transform: rotate(-1deg);
+  }
+  .page-title .hl.lilac {
+    background: var(--lilac);
+  }
+  .page-lead {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    max-width: 62ch;
+  }
+  .page-lead code {
+    font-family: var(--mono);
+    font-size: 14px;
+    background: var(--bg-2);
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+  .ilink {
+    color: var(--mint-deep);
+    border-bottom: 1px solid color-mix(in oklab, var(--mint-deep) 30%, transparent);
+  }
+  .ilink:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+  }
+
+  .cat-section {
+    padding: 40px 0;
+  }
+  .cat-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .cat-title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin: 0;
+  }
+  .cat-count {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+
+  .dir-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .inst-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s,
+      border-color 0.2s;
+  }
+  .inst-card:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 2px 4px rgba(15, 21, 18, 0.03),
+      0 24px 48px -24px rgba(15, 21, 18, 0.2);
+    border-color: var(--line-2);
+  }
+  .inst-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .inst-head h3 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin: 0;
+  }
+  .software {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: var(--radius-pill);
+    background: var(--bg-2);
+    color: var(--ink-2);
+  }
+  .inst-desc {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin: 0 0 14px;
+    flex: 1;
+  }
+  .inst-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .tag {
+    font-size: 11.5px;
+    padding: 3px 9px;
+    border-radius: var(--radius-pill);
+    background: var(--lilac-soft);
+    color: var(--lilac-deep);
+  }
+  .inst-foot {
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+  }
+  .users {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+  .go {
+    font-weight: 500;
+    color: var(--ink);
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .arr {
+    transition: transform 0.15s;
+  }
+  .inst-card:hover .arr {
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 1024px) {
+    .page-hero {
+      padding: 72px 0 32px;
+    }
+    .dir-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 720px) {
+    .page-hero {
+      padding: 56px 0 24px;
+    }
+    .dir-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,239 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const ways = [
+  {
+    num: '01',
+    title: '커뮤니티 추가',
+    body: '디렉토리에 빠진 한국어 연합우주 서버가 있다면, 아래 JSON 형식에 맞춰 PR을 보내주세요.',
+    cta: { href: 'https://github.com/fedidevkr/join-fediverse/blob/main/src/data/instances.json', label: 'instances.json 열기 →' },
+  },
+  {
+    num: '02',
+    title: '설명·문구 수정',
+    body: '카피가 어색하거나 정보가 부정확하면 바로 고쳐주세요. 모든 페이지는 하나의 Astro 컴포넌트 안에 문구가 같이 있어서 수정이 쉽습니다.',
+    cta: { href: 'https://github.com/fedidevkr/join-fediverse/tree/main/src/components', label: 'components 디렉토리 →' },
+  },
+  {
+    num: '03',
+    title: '디자인·접근성 개선',
+    body: '반응형 이슈, 스크린리더 문제, 색 대비, 애니메이션 선호 등 이슈가 보이면 GitHub 이슈로 올려주세요. PR도 환영합니다.',
+    cta: { href: 'https://github.com/fedidevkr/join-fediverse/issues/new', label: '이슈 열기 →' },
+  },
+  {
+    num: '04',
+    title: '오역·번역',
+    body: '현재는 한국어 전용이지만, 영어 판 요청이 있다면 이슈에 써주세요. 번역 구조(i18n)는 요청이 쌓이면 우선순위가 올라갑니다.',
+    cta: { href: 'https://github.com/fedidevkr/join-fediverse/issues', label: '요청 모아 보기 →' },
+  },
+];
+
+const exampleInstance = `{
+  "host": "example.kr",
+  "url": "https://example.kr",
+  "software": "Mastodon",
+  "category": "general",
+  "categoryLabel": "종합",
+  "tags": ["#일상", "#한국어"],
+  "description": "설명 1~2문장.",
+  "users": 1234,
+  "featured": false
+}`;
+---
+
+<Layout
+  title="기여하기 — 연합우주"
+  description="joinfediverse.kr은 공동의 문서입니다. 커뮤니티 추가·문구 수정·디자인 개선 어떤 기여든 환영해요."
+>
+  <Nav />
+
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="sec-eyebrow lilac">Contribute</span>
+      <h1 class="page-title">
+        같이 <span class="hl lilac">고쳐 써요</span>.
+      </h1>
+      <p class="page-lead">
+        joinfediverse.kr은 한 사람의 문서가 아니라 공동의 문서예요. 작은 오타 수정부터 새 커뮤니티 등록까지,
+        어떤 기여든 환영합니다. 모든 코드는 <a
+          href="https://github.com/fedidevkr/join-fediverse"
+          target="_blank"
+          rel="noopener"
+          class="ilink">GitHub</a
+        >에서 CC0로 공개되어 있어요.
+      </p>
+    </div>
+  </section>
+
+  <section class="ways">
+    <div class="wrap">
+      <div class="ways-grid">
+        {
+          ways.map((w) => (
+            <article class="way">
+              <span class="w-num">{w.num}</span>
+              <h3>{w.title}</h3>
+              <p>{w.body}</p>
+              <a href={w.cta.href} target="_blank" rel="noopener" class="w-cta">
+                {w.cta.label}
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="schema">
+    <div class="wrap">
+      <div class="schema-head">
+        <span class="sec-eyebrow">인스턴스 스키마</span>
+        <h2 class="sec-h">JSON 한 항목 예시.</h2>
+        <p class="sec-sub">
+          <code>src/data/instances.json</code>에 아래 모양의 객체를 추가하면 디렉토리에 자동으로 반영됩니다.
+          <code>users</code>는 <code>nodeinfo</code>의 <code>usage.users.total</code>을 그대로 넣고,
+          값을 확인할 수 없다면 <code>null</code>로 두세요.
+        </p>
+      </div>
+      <pre class="code"><code>{exampleInstance}</code></pre>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .page-hero {
+    padding: 96px 0 48px;
+  }
+  .page-title {
+    font-size: clamp(40px, 5.6vw, 72px);
+    line-height: 1.35;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    margin: 0 0 20px;
+    color: var(--ink);
+  }
+  .page-title .hl {
+    display: inline-block;
+    padding: 0 6px;
+    background: var(--mint);
+    border-radius: 8px;
+    transform: rotate(-1deg);
+  }
+  .page-title .hl.lilac {
+    background: var(--lilac);
+  }
+  .page-lead {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    max-width: 62ch;
+  }
+  .ilink {
+    color: var(--mint-deep);
+    border-bottom: 1px solid color-mix(in oklab, var(--mint-deep) 30%, transparent);
+  }
+  .ilink:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+  }
+
+  .ways {
+    padding: 32px 0 72px;
+  }
+  .ways-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .way {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+  .w-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--lilac-soft);
+    color: var(--lilac-deep);
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .way h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    letter-spacing: -0.015em;
+  }
+  .way p {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    margin: 0 0 16px;
+  }
+  .w-cta {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--mint-deep);
+    font-weight: 500;
+  }
+  .w-cta:hover {
+    color: var(--ink);
+  }
+
+  .schema {
+    padding: 32px 0 96px;
+  }
+  .schema-head {
+    margin-bottom: 24px;
+  }
+  .schema-head .sec-sub code {
+    font-family: var(--mono);
+    font-size: 13.5px;
+    background: var(--bg-2);
+    padding: 2px 6px;
+    border-radius: 5px;
+  }
+  .code {
+    background: var(--ink);
+    color: #d7dbd8;
+    padding: 24px 28px;
+    border-radius: var(--radius);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.75;
+    overflow-x: auto;
+    margin: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .page-hero {
+      padding: 72px 0 32px;
+    }
+  }
+  @media (max-width: 720px) {
+    .page-hero {
+      padding: 56px 0 24px;
+    }
+    .ways-grid {
+      grid-template-columns: 1fr;
+    }
+    .way {
+      padding: 22px;
+    }
+    .code {
+      padding: 18px 20px;
+      font-size: 12px;
+    }
+  }
+</style>
