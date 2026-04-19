@@ -1,0 +1,201 @@
+---
+interface Photo {
+  src: string;
+  caption: string;
+  rotate: number;
+  top: string;
+  left: string;
+}
+
+interface Props {
+  photos?: Photo[];
+  height?: string;
+}
+
+const defaultPhotos: Photo[] = [
+  {
+    src: '/naru/cosmos-collection.webp',
+    caption: 'cosmos collection',
+    rotate: -5,
+    top: '8%',
+    left: '3%',
+  },
+  {
+    src: '/naru/gonghome.webp',
+    caption: 'gonghome',
+    rotate: 4,
+    top: '14%',
+    left: '28%',
+  },
+  {
+    src: '/naru/auothelove.webp',
+    caption: 'auothelove',
+    rotate: -6,
+    top: '8%',
+    left: '53%',
+  },
+  {
+    src: '/naru/house-of-memories.webp',
+    caption: 'house of memories',
+    rotate: 7,
+    top: '14%',
+    left: '78%',
+  },
+];
+
+const { photos = defaultPhotos, height = 'clamp(260px, 28vw, 380px)' } = Astro.props;
+
+const strokes = [
+  'M 11 22 Q 22 8 35 26',
+  'M 36 26 Q 48 38 60 22',
+  'M 61 22 Q 73 8 86 26',
+];
+---
+
+<div class="polaroid-wall" style={`--wall-h: ${height};`}>
+  <svg
+    class="strings"
+    viewBox="0 0 100 100"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    {strokes.map((d) => <path d={d} />)}
+  </svg>
+
+  {
+    photos.map((p) => (
+      <figure
+        class="polaroid"
+        style={`--rot: ${p.rotate}deg; top: ${p.top}; left: ${p.left};`}
+      >
+        <div class="pin" aria-hidden="true" />
+        <div class="photo">
+          <img src={p.src} alt={p.caption} loading="lazy" />
+        </div>
+        <figcaption>{p.caption}</figcaption>
+      </figure>
+    ))
+  }
+</div>
+
+<style>
+  .polaroid-wall {
+    position: relative;
+    width: 100%;
+    height: var(--wall-h);
+    pointer-events: none;
+  }
+
+  .strings {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+  }
+  .strings path {
+    fill: none;
+    stroke: var(--ink-3);
+    stroke-width: 1.2;
+    stroke-linecap: round;
+    stroke-dasharray: 2 2.2;
+    opacity: 0.55;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .polaroid {
+    position: absolute;
+    width: clamp(120px, 13vw, 170px);
+    padding: 12px 12px 32px;
+    margin: 0;
+    background: #fffdf7;
+    box-shadow:
+      0 1px 2px rgba(15, 21, 18, 0.1),
+      0 22px 36px -20px rgba(15, 21, 18, 0.35);
+    transform: rotate(var(--rot));
+    transition:
+      transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+      box-shadow 0.3s;
+    pointer-events: auto;
+  }
+  .polaroid:hover {
+    transform: rotate(0deg) scale(1.05);
+    z-index: 5;
+    box-shadow:
+      0 2px 4px rgba(15, 21, 18, 0.12),
+      0 30px 48px -20px rgba(15, 21, 18, 0.4);
+  }
+
+  .pin {
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #ff8a6b, #9a2a1a 75%);
+    box-shadow:
+      inset -1px -1px 2px rgba(0, 0, 0, 0.3),
+      0 3px 4px rgba(0, 0, 0, 0.3);
+    transform: translateX(-50%);
+  }
+
+  .photo {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: var(--bg-2);
+  }
+  .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  figcaption {
+    margin-top: 10px;
+    text-align: center;
+    font-family: 'Caveat', 'Shadows Into Light', cursive;
+    font-size: 20px;
+    line-height: 1.1;
+    color: var(--ink-2);
+    letter-spacing: 0.01em;
+  }
+
+  @media (max-width: 720px) {
+    .polaroid-wall {
+      height: auto;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 6px;
+      padding: 10px 4px 18px;
+    }
+    .polaroid-wall .strings {
+      display: none;
+    }
+    .polaroid {
+      position: static;
+      flex: 0 1 auto;
+      width: clamp(48px, 14vw, 80px);
+      padding: 5px 5px 16px;
+    }
+    .polaroid .pin {
+      width: 10px;
+      height: 10px;
+      top: -5px;
+    }
+    .polaroid figcaption {
+      margin-top: 6px;
+      font-size: 12px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .polaroid,
+    .polaroid:hover {
+      transition: none;
+    }
+  }
+</style>

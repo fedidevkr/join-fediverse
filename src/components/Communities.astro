@@ -1,4 +1,6 @@
 ---
+import PolaroidWall from './PolaroidWall.astro';
+
 const communities = [
   {
     klass: 'k-dev',
@@ -28,6 +30,9 @@ const communities = [
 ---
 
 <section id="communities">
+  <div class="polaroid-bg" aria-hidden="true">
+    <PolaroidWall />
+  </div>
   <div class="wrap">
     <span class="sec-eyebrow lilac">커뮤니티</span>
     <h2 class="sec-h">
@@ -75,6 +80,34 @@ const communities = [
 </section>
 
 <style>
+  #communities {
+    position: relative;
+    isolation: isolate;
+  }
+  .polaroid-bg {
+    position: absolute;
+    top: 0;
+    left: 38%;
+    width: 62%;
+    max-width: 820px;
+    z-index: 0;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .polaroid-bg :global(.polaroid-wall) {
+    pointer-events: none;
+  }
+  #communities > .wrap {
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 720px) {
+    .polaroid-bg {
+      top: 4%;
+    }
+  }
+
   .comms {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
