@@ -2,12 +2,21 @@
 interface Props {
   title: string;
   description?: string;
+  keywords?: string;
+  ogImage?: string;
+  ogType?: string;
 }
 
 const {
   title,
   description = '작은 공동체들이 공통 프로토콜로 이어진 소셜 네트워크, 연합우주. 광고 없는 타임라인.',
+  keywords = '연합우주, 페디버스, fediverse, ActivityPub, 액티비티펍, mastodon, 마스토돈, misskey, 미스키, pixelfed, 픽셀페드, 탈중앙 소셜, 한국어 페디버스',
+  ogImage,
+  ogType = 'website',
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).toString() : undefined;
 ---
 
 <!doctype html>
@@ -16,10 +25,19 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonical.toString()} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://joinfediverse.kr" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical.toString()} />
+    <meta property="og:site_name" content="joinfediverse.kr" />
+    <meta property="og:locale" content="ko_KR" />
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+    <meta name="twitter:card" content={ogImageUrl ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -35,6 +53,7 @@ const {
       rel="stylesheet"
     />
     <title>{title}</title>
+    <slot name="head" />
   </head>
   <body>
     <slot />

@@ -10,9 +10,41 @@ import Possibilities from '../components/Possibilities.astro';
 import FAQ from '../components/FAQ.astro';
 import FinalCTA from '../components/FinalCTA.astro';
 import Footer from '../components/Footer.astro';
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'joinfediverse.kr',
+  alternateName: '연합우주 한국어 안내',
+  url: 'https://joinfediverse.kr',
+  inLanguage: 'ko-KR',
+  description:
+    'ActivityPub 기반 연합우주(Fediverse/페디버스) 한국어 안내. Mastodon·Misskey·Pixelfed 같은 서비스로 이루어진 탈중앙 소셜 네트워크에 가입할 한국어 커뮤니티 디렉토리.',
+};
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'joinfediverse.kr',
+  url: 'https://joinfediverse.kr',
+  sameAs: ['https://github.com/fedidevkr/join-fediverse'],
+};
 ---
 
-<Layout title="연합우주 — 작은 공동체들의 소셜 네트워크">
+<Layout
+  title="연합우주(페디버스) — ActivityPub 기반 탈중앙 소셜 네트워크 한국어 안내"
+  description="ActivityPub 기반 연합우주(Fediverse/페디버스) 한국어 안내. Mastodon·Misskey·Pixelfed 같은 서비스로 이루어진 페디버스에 가입할 한국어 커뮤니티를 찾아보세요."
+>
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(websiteSchema)}
+  />
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(organizationSchema)}
+  />
   <Nav />
   <Hero />
   <Niches />

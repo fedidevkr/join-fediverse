@@ -75,12 +75,32 @@ const groups = [
     ],
   },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: groups.flatMap((g) =>
+    g.items.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.a,
+      },
+    }))
+  ),
+};
 ---
 
 <Layout
-  title="자주 묻는 질문 — 연합우주"
-  description="연합우주 시작과 운영에 대해 가장 자주 받는 질문들."
+  title="자주 묻는 질문 — 연합우주(페디버스/Fediverse/ActivityPub)"
+  description="연합우주(페디버스·Fediverse·ActivityPub) 시작과 운영에 대한 자주 묻는 질문. 서버 선택, 계정 이사, 모더레이션, 프로토콜 설명."
 >
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(faqSchema)}
+  />
   <Nav />
 
   <section class="page-hero">
