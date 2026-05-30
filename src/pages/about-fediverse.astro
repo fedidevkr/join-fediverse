@@ -75,7 +75,7 @@ const sections = [
     body: [
       'Bluesky는 <b>AT Protocol</b>, Nostr는 <b>자체 프로토콜</b>을 씁니다. 페디버스(ActivityPub)와는 별개의 네트워크예요.',
       '일부 브릿지(예: Bridgy Fed)로 상호연동 실험이 진행 중이긴 하지만, 기본적으로는 서로 다른 망이라고 생각하면 됩니다.',
-      'ActivityPub 진영이 가장 오래됐고 사용자도 가장 많습니다 (2026년 기준 1,200만+ 계정).',
+      'ActivityPub은 2018년 W3C 표준이 된 가장 오래된 프로토콜이에요. Nostr는 2020년, Bluesky는 2022년에 시작한 신생 프로토콜이고요. 셋 다 활발히 운영되는 살아있는 네트워크예요.',
     ],
   },
 ];
@@ -134,6 +134,16 @@ const sections = [
       </section>
     ))
   }
+
+  <section class="refs">
+    <div class="wrap">
+      <p class="refs-text">
+        이 페이지의 쉬운 설명 방식과 "이메일처럼" 비유는
+        <a href="https://activitypub.ghost.org" target="_blank" rel="noopener">Ghost의 ActivityPub 빌드 일지</a>를 많이 참고했어요.
+        ActivityPub을 처음 마주하는 분들을 위해 잘 풀어 써둔 좋은 자료입니다.
+      </p>
+    </div>
+  </section>
 
   <FinalCTA
     title="이름을 알았다면<br />이제 실제로."
@@ -238,6 +248,30 @@ const sections = [
     background: var(--mint-soft);
     padding: 0 4px;
     border-radius: 4px;
+  }
+
+  .refs {
+    padding: 24px 0 8px;
+  }
+  .refs .wrap {
+    max-width: 760px;
+  }
+  .refs-text {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-3);
+    margin: 0;
+    padding: 16px 20px;
+    background: var(--bg-2);
+    border-radius: 12px;
+  }
+  .refs-text a {
+    color: var(--ink-2);
+    border-bottom: 1px solid color-mix(in oklab, var(--ink-2) 30%, transparent);
+  }
+  .refs-text a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
   }
 
   @media (max-width: 1024px) {
