@@ -1,0 +1,334 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import Footer from '../components/Footer.astro';
+
+const lexicon = [
+  {
+    casual: '동네',
+    formal: '인스턴스 (instance) / 서버 (server)',
+    desc: '페디버스의 한 단위. Mastodon·Misskey 같은 소프트웨어를 누군가가 호스팅한 곳. hackers.pub, oeee.cafe, mastodon.social — 다 인스턴스예요.',
+  },
+  {
+    casual: '같은 망 / 동네들이 이어진 곳',
+    formal: 'ActivityPub',
+    desc: '인스턴스끼리 어떻게 대화할지 정해놓은 오픈 프로토콜. 2018년 W3C 표준으로 확정됐어요.',
+  },
+  {
+    casual: '이어져 있다 / 닿아 있다',
+    formal: '연합 (Federation)',
+    desc: '서로 다른 인스턴스가 게시물·팔로우·답장을 주고받는 행위. "@minji@hackers.pub"이 oeee.cafe에서 답장을 받을 수 있는 이유.',
+  },
+  {
+    casual: '여기 / 모든 동네',
+    formal: '페디버스 (Fediverse) / 연합우주',
+    desc: 'ActivityPub로 연합된 서비스 전체. Federation + Universe의 합성어. 이 사이트 이름의 어원이기도 해요.',
+  },
+  {
+    casual: '망 위의 다른 앱들',
+    formal: 'ActivityPub 구현체',
+    desc: 'Mastodon, Pixelfed, PeerTube, Misskey, Lemmy 등. 다 다른 앱인데 ActivityPub로 서로 대화해요.',
+  },
+];
+
+const sections = [
+  {
+    eyebrow: 'ActivityPub',
+    title: '서로 다른 앱이 같은 방식으로 대화하는 약속',
+    body: [
+      'ActivityPub는 <b>서로 다른 서버·앱이 같은 방식으로 대화</b>할 수 있게 해주는 오픈 프로토콜이에요. 2018년에 W3C 표준으로 확정됐습니다.',
+      '이메일을 떠올리면 비슷해요. 네이버 메일에서 지메일로 메일을 보낼 수 있는 건 SMTP라는 표준 프로토콜이 있기 때문이죠. ActivityPub는 SNS 버전의 그것입니다.',
+      'Mastodon 계정으로 Pixelfed 사람을 팔로우할 수 있는 이유, 한 인스턴스의 글이 다른 인스턴스에서 답장 받을 수 있는 이유 — 다 여기서 옵니다.',
+    ],
+  },
+  {
+    eyebrow: '인스턴스 / 서버',
+    title: '"동네"의 정식 명칭',
+    body: [
+      '페디버스의 한 단위를 부르는 공식 용어. Mastodon이나 Misskey 같은 소프트웨어를 <b>누군가가 직접 호스팅한</b> 사이트를 인스턴스라고 부릅니다.',
+      '운영자가 다르면 규칙·분위기·관리 방식도 다릅니다. 한 회사가 운영하는 트위터·스레드와 가장 큰 차이예요.',
+      '한국어권에서는 "서버"라는 표현도 자주 쓰입니다. 두 단어는 사실상 같은 뜻으로 통용돼요.',
+    ],
+  },
+  {
+    eyebrow: 'Federation / 연합',
+    title: '인스턴스 사이의 대화',
+    body: [
+      '서로 다른 인스턴스가 게시물·팔로우·답장 같은 활동(Activity)을 주고받는 것을 <b>연합(Federation)</b>이라고 합니다.',
+      '기술적으로는: 한 인스턴스가 ActivityPub의 Activity(Follow, Create, Like 등)를 만들어 다른 인스턴스의 inbox로 HTTP POST 요청을 보냅니다.',
+      '사용자 입장에선 그냥 "다른 동네 사람한테 답장이 갔다"로 보이고요.',
+    ],
+  },
+  {
+    eyebrow: '페디버스 / 연합우주',
+    title: '연합된 서비스 전체',
+    body: [
+      '<b>Federation + Universe</b>의 합성어. ActivityPub로 연합된 서비스 전체를 가리키는 말이에요.',
+      'Mastodon만, Pixelfed만, PeerTube만이 아니라 — 이 모두를 <b>포함하는 네트워크 전체</b>를 부르는 단어입니다.',
+      '한국어로는 "연합우주"로 직역되기도 합니다.',
+    ],
+  },
+  {
+    eyebrow: '다른 네트워크와의 차이',
+    title: 'Bluesky·Nostr는 다른 프로토콜',
+    body: [
+      'Bluesky는 <b>AT Protocol</b>, Nostr는 <b>자체 프로토콜</b>을 씁니다. 페디버스(ActivityPub)와는 별개의 네트워크예요.',
+      '일부 브릿지(예: Bridgy Fed)로 상호연동 실험이 진행 중이긴 하지만, 기본적으로는 서로 다른 망이라고 생각하면 됩니다.',
+      'ActivityPub은 2018년 W3C 표준이 된 가장 오래된 프로토콜이에요. Nostr는 2020년, Bluesky는 2022년에 시작한 신생 프로토콜이고요. 셋 다 활발히 운영되는 살아있는 네트워크예요.',
+    ],
+  },
+];
+---
+
+<Layout
+  title="페디버스에 대해 — 정확한 용어로 (joinfediverse.kr)"
+  description="이 사이트는 동네·같은 망 같은 친숙어로 풀어 썼습니다. 인스턴스·ActivityPub·Federation·페디버스 같은 정식 용어를 한 곳에 정리했어요."
+>
+  <Nav />
+
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="sec-eyebrow">본격적으로</span>
+      <h1 class="page-title">
+        정확한 <span class="hl">이름으로</span>,<br />다시 한번.
+      </h1>
+      <p class="page-lead">
+        이 사이트는 처음 오신 분이 편하게 읽도록 <b>동네</b>, <b>같은 망</b> 같은 친숙한 말로 풀어 썼어요.
+        하지만 페디버스에는 공식 명칭이 있고, 그걸 알면 다른 자료를 읽기가 훨씬 쉬워집니다.
+        조금 더 깊이 알고 싶으신 분을 위한 정리예요.
+      </p>
+    </div>
+  </section>
+
+  <section class="lexicon">
+    <div class="wrap">
+      <h2 class="sec-h-sm">한눈에 — 친숙어 / 정식 명칭</h2>
+      <div class="lex-table" role="table" aria-label="친숙어와 정식 명칭 대응표">
+        <div class="lex-head" role="row">
+          <span role="columnheader">이 사이트의 표현</span>
+          <span role="columnheader">정식 명칭</span>
+          <span role="columnheader">한 줄 설명</span>
+        </div>
+        {
+          lexicon.map((row) => (
+            <div class="lex-row" role="row">
+              <span class="casual" role="cell">{row.casual}</span>
+              <span class="formal" role="cell">{row.formal}</span>
+              <span class="desc" role="cell">{row.desc}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {
+    sections.map((s) => (
+      <section class="explainer">
+        <div class="wrap">
+          <span class="sec-eyebrow">{s.eyebrow}</span>
+          <h2 class="sec-h-sm">{s.title}</h2>
+          {s.body.map((p) => <p class="body" set:html={p} />)}
+        </div>
+      </section>
+    ))
+  }
+
+  <section class="refs">
+    <div class="wrap">
+      <p class="refs-text">
+        이 페이지의 쉬운 설명 방식과 "이메일처럼" 비유는
+        <a href="https://activitypub.ghost.org" target="_blank" rel="noopener">Ghost의 ActivityPub 빌드 일지</a>를 많이 참고했어요.
+        ActivityPub을 처음 마주하는 분들을 위해 잘 풀어 써둔 좋은 자료입니다.
+      </p>
+    </div>
+  </section>
+
+  <FinalCTA
+    title="이름을 알았다면<br />이제 실제로."
+    body="용어가 잡혔으면 직접 한 동네에 들어가 보는 게 가장 빠릅니다. 안 맞으면 옮기면 그만이에요."
+    primary={{ href: '/communities', label: '동네 둘러보기' }}
+    secondary={{ href: '/faq', label: '더 구체적인 질문이 있어요' }}
+  />
+  <Footer />
+</Layout>
+
+<style>
+  .page-hero {
+    padding: 96px 0 48px;
+  }
+  .page-title {
+    font-size: clamp(40px, 5.6vw, 72px);
+    line-height: 1.3;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    margin: 0 0 20px;
+    color: var(--ink);
+  }
+  .page-title .hl {
+    display: inline-block;
+    padding: 0 6px;
+    background: var(--mint);
+    border-radius: 8px;
+    transform: rotate(-1deg);
+  }
+  .page-lead {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--ink-2);
+    max-width: 62ch;
+  }
+
+  .lexicon {
+    padding: 40px 0 24px;
+  }
+  .sec-h-sm {
+    font-size: clamp(22px, 2.8vw, 30px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 24px;
+    color: var(--ink);
+  }
+  .lex-table {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .lex-head,
+  .lex-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1.2fr 2fr;
+    gap: 24px;
+    padding: 18px 24px;
+    align-items: start;
+  }
+  .lex-head {
+    background: var(--bg-2);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-3);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .lex-row {
+    border-top: 1px solid var(--line);
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+  .lex-row .casual {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .lex-row .formal {
+    font-family: var(--mono);
+    font-size: 13.5px;
+    color: var(--lilac-deep);
+  }
+  .lex-row .desc {
+    color: var(--ink-2);
+  }
+
+  .explainer {
+    padding: 36px 0;
+  }
+  .explainer .wrap {
+    max-width: 760px;
+  }
+  .explainer .body {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--ink-2);
+    margin: 0 0 14px;
+  }
+  .explainer .body b {
+    font-weight: 600;
+    color: var(--ink);
+    background: var(--mint-soft);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  .refs {
+    padding: 24px 0 8px;
+  }
+  .refs .wrap {
+    max-width: 760px;
+  }
+  .refs-text {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-3);
+    margin: 0;
+    padding: 16px 20px;
+    background: var(--bg-2);
+    border-radius: 12px;
+  }
+  .refs-text a {
+    color: var(--ink-2);
+    border-bottom: 1px solid color-mix(in oklab, var(--ink-2) 30%, transparent);
+  }
+  .refs-text a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+  }
+
+  @media (max-width: 1024px) {
+    .page-hero {
+      padding: 72px 0 32px;
+    }
+    .lex-head,
+    .lex-row {
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .lex-head span:nth-child(3),
+    .lex-row .desc {
+      grid-column: 1 / -1;
+      padding-top: 8px;
+      border-top: 1px dashed var(--line);
+    }
+  }
+  @media (max-width: 720px) {
+    .page-hero {
+      padding: 56px 0 24px;
+    }
+    .lex-head,
+    .lex-row {
+      grid-template-columns: 1fr;
+    }
+    .lex-head {
+      display: none;
+    }
+    .lex-row {
+      padding: 16px 18px;
+    }
+    .lex-row .casual::before {
+      content: '친숙어 · ';
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: var(--ink-3);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .lex-row .formal::before {
+      content: '정식 명칭 · ';
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: var(--ink-3);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 2px;
+      margin-top: 8px;
+    }
+    .lex-row .desc {
+      padding-top: 8px;
+      border-top: 1px dashed var(--line);
+      margin-top: 8px;
+    }
+  }
+</style>
