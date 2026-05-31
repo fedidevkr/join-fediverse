@@ -13,11 +13,6 @@ const apps = [
 <header class="hero" id="top">
   <div class="wrap">
     <div class="hero-left">
-      <div class="hero-eyebrow">
-        joinfediverse.kr
-        <span class="pulse" aria-hidden="true"></span>
-        라이브 피드
-      </div>
       <h1>
         작은 동네들이<br />
         모여<br />
@@ -32,36 +27,13 @@ const apps = [
         <a href="#communities" class="btn btn-primary">
           동네 둘러보기 <span class="arr">→</span>
         </a>
-        <a href="#how" class="btn btn-ghost">어떻게 이어져 있어요?</a>
       </div>
-      <div class="hero-meta">
-        <div class="stat"><b>12.7M</b><span>명이 살고 있어요</span></div>
-        <div class="vbar"></div>
-        <div class="stat"><b>946K</b><span>명이 이번 달에 다녀갔어요</span></div>
-        <div class="vbar"></div>
-        <div class="stat"><b>42K</b><span>곳의 활발한 동네</span></div>
-      </div>
-      <p class="hero-source">
-        통계 출처 ·
-        <a href="https://fedidb.com" target="_blank" rel="noopener">fedidb.com</a>
+      <p class="hero-note">
+        광고 없이, 글이 올라온 순서대로 흘러요. 무엇을 볼지는 내가 골라요.
       </p>
     </div>
 
     <div class="hero-vis" aria-hidden="true">
-      <div class="grid-bg"></div>
-      <div class="blob b1"></div>
-      <div class="blob b2"></div>
-
-      <svg class="wires" viewBox="0 0 520 540" preserveAspectRatio="none">
-        <path d="M 150 80 Q 260 200 380 140"></path>
-        <path d="M 380 140 Q 300 320 200 400"></path>
-        <path d="M 150 80 Q 140 280 200 400"></path>
-      </svg>
-
-      <div class="floating-badge fb-top"><span class="dot"></span>새 글 · 3분 전</div>
-      <div class="floating-badge fb-mid"><span class="dot"></span>다른 동네에서 답장</div>
-      <div class="floating-badge fb-bot"><span class="dot"></span>#관심사 해시태그</div>
-
       <article class="card cA">
         <div class="c-head">
           <div class="av">민</div>
@@ -126,7 +98,7 @@ const apps = [
 <style>
   .hero {
     position: relative;
-    padding: 96px 0 80px;
+    padding: 72px 0 72px;
     overflow: hidden;
   }
   .hero .wrap {
@@ -136,46 +108,12 @@ const apps = [
     align-items: center;
   }
 
-  .hero-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 6px 14px 6px 8px;
-    border-radius: var(--radius-pill);
-    background: white;
-    border: 1px solid var(--line);
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--ink-2);
-    margin-bottom: 28px;
-  }
-  .pulse {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--mint-deep);
-    box-shadow: 0 0 0 0 color-mix(in oklab, var(--mint-deep) 60%, transparent);
-    animation: pulse 2s infinite;
-    display: inline-block;
-  }
-  @keyframes pulse {
-    0% {
-      box-shadow: 0 0 0 0 color-mix(in oklab, var(--mint-deep) 50%, transparent);
-    }
-    70% {
-      box-shadow: 0 0 0 10px color-mix(in oklab, var(--mint-deep) 0%, transparent);
-    }
-    100% {
-      box-shadow: 0 0 0 0 color-mix(in oklab, var(--mint-deep) 0%, transparent);
-    }
-  }
-
   .hero h1 {
-    font-size: clamp(42px, 6.2vw, 84px);
-    line-height: 1.5;
-    letter-spacing: -0.035em;
+    font-size: clamp(36px, 4.6vw, 62px);
+    line-height: 1.3;
+    letter-spacing: -0.03em;
     font-weight: 700;
-    margin: 0 0 24px;
+    margin: 0 0 22px;
     color: var(--ink);
   }
   .hero h1 .hl {
@@ -192,106 +130,20 @@ const apps = [
     line-height: 1.65;
     color: var(--ink-2);
     max-width: 50ch;
-    margin: 0 0 36px;
+    margin: 0 0 28px;
   }
 
-  .hero-meta {
-    display: flex;
-    gap: 28px;
-    align-items: center;
-    margin-top: 40px;
-    padding-top: 28px;
-    border-top: 1px solid var(--line);
-  }
-  .hero-meta .stat {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .hero-meta .stat b {
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-  }
-  .hero-meta .stat span {
-    font-size: 12px;
+  .hero-note {
+    margin: 24px 0 0;
+    font-size: 14px;
+    line-height: 1.6;
     color: var(--ink-3);
-    font-family: var(--mono);
-  }
-  .hero-meta .vbar {
-    width: 1px;
-    height: 32px;
-    background: var(--line);
-  }
-  .hero-source {
-    margin: 12px 0 0;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-3);
-    letter-spacing: 0.02em;
-  }
-  .hero-source a {
-    color: var(--mint-deep);
-    border-bottom: 1px solid color-mix(in oklab, var(--mint-deep) 30%, transparent);
-  }
-  .hero-source a:hover {
-    color: var(--ink);
-    border-bottom-color: var(--ink);
   }
 
   .hero-vis {
     position: relative;
     height: 540px;
     isolation: isolate;
-  }
-  .hero-vis .grid-bg {
-    position: absolute;
-    inset: -40px;
-    z-index: -1;
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 40px 40px;
-    mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
-    opacity: 0.7;
-  }
-  .hero-vis .blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.55;
-    z-index: -1;
-  }
-  .hero-vis .blob.b1 {
-    width: 320px;
-    height: 320px;
-    background: var(--mint);
-    top: 20px;
-    left: -40px;
-  }
-  .hero-vis .blob.b2 {
-    width: 280px;
-    height: 280px;
-    background: var(--lilac);
-    bottom: 20px;
-    right: -20px;
-  }
-
-  .hero-vis svg.wires {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 2;
-  }
-  .hero-vis svg.wires path {
-    fill: none;
-    stroke: var(--ink);
-    stroke-width: 1.5;
-    stroke-dasharray: 4 4;
-    opacity: 0.25;
   }
 
   .card {
@@ -397,49 +249,6 @@ const apps = [
     color: #b54020;
   }
 
-  .floating-badge {
-    position: absolute;
-    background: white;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-pill);
-    padding: 8px 14px 8px 10px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--mono);
-    font-size: 11.5px;
-    color: var(--ink-2);
-    box-shadow: 0 10px 24px -12px rgba(15, 21, 18, 0.2);
-    z-index: 6;
-  }
-  .floating-badge .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--mint-deep);
-  }
-  .fb-top {
-    top: 0;
-    right: 80px;
-    transform: rotate(3deg);
-  }
-  .fb-mid {
-    top: 230px;
-    left: -10px;
-    transform: rotate(-4deg);
-  }
-  .fb-mid .dot {
-    background: var(--lilac-deep);
-  }
-  .fb-bot {
-    bottom: 10px;
-    right: 30px;
-    transform: rotate(2deg);
-  }
-  .fb-bot .dot {
-    background: var(--coral);
-  }
-
   .strip {
     padding: 24px 0 40px;
     border-bottom: 1px solid var(--line);
@@ -509,28 +318,13 @@ const apps = [
     .hero {
       padding: 48px 0 48px;
     }
-    .hero-eyebrow {
-      font-size: 11px;
-    }
     .hero h1 {
-      font-size: clamp(36px, 9vw, 52px);
-      margin-bottom: 18px;
+      font-size: clamp(32px, 8vw, 46px);
+      margin-bottom: 16px;
     }
     .hero .lead {
       font-size: 15.5px;
-      margin-bottom: 28px;
-    }
-    .hero-meta {
-      flex-wrap: wrap;
-      gap: 20px;
-      margin-top: 32px;
-      padding-top: 24px;
-    }
-    .hero-meta .stat b {
-      font-size: 19px;
-    }
-    .hero-meta .vbar {
-      display: none;
+      margin-bottom: 24px;
     }
     .hero-vis {
       height: 440px;
@@ -550,17 +344,6 @@ const apps = [
       width: 250px;
       bottom: 20px;
       left: 30px;
-    }
-    .fb-top {
-      right: 30px;
-    }
-    .fb-bot {
-      bottom: 0;
-      right: 10px;
-    }
-    .fb-mid {
-      left: 0;
-      top: 200px;
     }
     .strip {
       padding: 20px 0 32px;

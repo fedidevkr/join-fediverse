@@ -2,8 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
-import Niches from '../components/Niches.astro';
 import Communities from '../components/Communities.astro';
+import DevWelcome from '../components/DevWelcome.astro';
 import HowItWorks from '../components/HowItWorks.astro';
 import Platforms from '../components/Platforms.astro';
 import Possibilities from '../components/Possibilities.astro';
@@ -19,7 +19,7 @@ const websiteSchema = {
   url: 'https://joinfediverse.kr',
   inLanguage: 'ko-KR',
   description:
-    'ActivityPub 기반 연합우주(Fediverse/페디버스) 한국어 안내. Mastodon·Misskey·Pixelfed 같은 서비스로 이루어진 탈중앙 소셜 네트워크에 가입할 한국어 커뮤니티 디렉토리.',
+    '연합우주(페디버스)의 한국어 안내. Mastodon·Misskey·Pixelfed 같은 작은 공동체들이 모여 있어요.',
 };
 
 const organizationSchema = {
@@ -32,8 +32,8 @@ const organizationSchema = {
 ---
 
 <Layout
-  title="연합우주(페디버스) — ActivityPub 기반 탈중앙 소셜 네트워크 한국어 안내"
-  description="ActivityPub 기반 연합우주(Fediverse/페디버스) 한국어 안내. Mastodon·Misskey·Pixelfed 같은 서비스로 이루어진 페디버스에 가입할 한국어 커뮤니티를 찾아보세요."
+  title="연합우주 — 작은 공동체들이 모여 있는 소셜 네트워크"
+  description="연합우주(페디버스) 한국어 안내. Mastodon·Misskey·Pixelfed 같은 작은 공동체 중에서, 분위기가 맞는 곳을 골라 시작해보세요."
 >
   <script
     slot="head"
@@ -47,12 +47,12 @@ const organizationSchema = {
   />
   <Nav />
   <Hero />
-  <Niches />
   <Communities />
+  <DevWelcome />
   <Platforms />
   <HowItWorks />
   <Possibilities />
   <Bridge />
-  <FinalCTA />
+  <FinalCTA secondary={{ href: '/faq', label: '궁금한 게 있어요' }} />
   <Footer />
 </Layout>

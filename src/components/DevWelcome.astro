@@ -1,0 +1,113 @@
+---
+---
+
+<section class="dev-welcome">
+  <div class="wrap">
+    <a href="https://hackers.pub" target="_blank" rel="noopener" class="card">
+      <span class="logo" aria-hidden="true">
+        <img
+          src="/images/logos/fediverse/hackerspub.svg"
+          alt="Hackers Pub"
+          width="32"
+          height="32"
+          loading="lazy"
+        />
+      </span>
+      <div class="text">
+        <span class="eyebrow">소프트웨어, 만드는 쪽에 관심 있나요?</span>
+        <h3>코드와 시스템 이야기를 긴 글로 나누는 <b>hackers.pub</b>이 있어요.</h3>
+        <p>devlog·오픈소스·삽질기까지, 개발하다 떠오른 생각을 편하게 풀어놓는 동네예요. 처음이라도, 읽기만 해도 환영이에요.</p>
+      </div>
+      <span class="cta">둘러보기 <span class="arr">→</span></span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .dev-welcome {
+    padding: 8px 0 24px;
+  }
+  .dev-welcome .card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 28px;
+    background: var(--mint-soft);
+    border: 1px solid color-mix(in oklab, var(--mint-deep) 18%, transparent);
+    border-radius: 20px;
+    transition:
+      transform 0.2s,
+      border-color 0.2s,
+      box-shadow 0.2s;
+  }
+  .dev-welcome .card:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in oklab, var(--mint-deep) 30%, transparent);
+    box-shadow: 0 24px 48px -32px rgba(15, 21, 18, 0.18);
+  }
+  .dev-welcome .logo {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: white;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+  .dev-welcome .logo img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    display: block;
+  }
+  .dev-welcome .eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    color: var(--mint-deep);
+    margin-bottom: 6px;
+  }
+  .dev-welcome h3 {
+    font-size: clamp(17px, 2vw, 20px);
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    line-height: 1.5;
+    margin: 0 0 6px;
+  }
+  .dev-welcome h3 b {
+    font-weight: 700;
+  }
+  .dev-welcome p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+  .dev-welcome .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 14.5px;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .dev-welcome .card:hover .arr {
+    transform: translateX(4px);
+  }
+  .dev-welcome .arr {
+    transition: transform 0.15s;
+  }
+
+  @media (max-width: 720px) {
+    .dev-welcome .card {
+      grid-template-columns: auto 1fr;
+      gap: 16px 18px;
+      padding: 20px;
+    }
+    .dev-welcome .cta {
+      grid-column: 1 / -1;
+    }
+  }
+</style>
