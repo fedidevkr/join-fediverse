@@ -83,17 +83,17 @@ const fmt = (n: number | null) => (n == null ? '집계 비공개' : `${n.toLocal
     title="빠진 서버가 있나요?"
     body="joinfediverse.kr의 커뮤니티 디렉토리는 공동의 문서예요. GitHub PR로 직접 추가하거나, 이슈로 제보해주세요."
     primary={{ href: '/contribute', label: '기여하기' }}
-    secondary={{ href: '/faq', label: '더 궁금한 것이 있어요' }}
+    secondary={{ href: '/about-fediverse', label: '이름과 구조가 궁금해요' }}
   />
   <Footer />
 </Layout>
 
 <style>
   .page-hero {
-    padding: 96px 0 48px;
+    padding: 56px 0 28px;
   }
   .page-title {
-    font-size: clamp(40px, 5.6vw, 72px);
+    font-size: clamp(30px, 3.6vw, 44px);
     line-height: 1.35;
     letter-spacing: -0.03em;
     font-weight: 700;
@@ -249,7 +249,7 @@ const fmt = (n: number | null) => (n == null ? '집계 비공개' : `${n.toLocal
 
   @media (max-width: 1024px) {
     .page-hero {
-      padding: 72px 0 32px;
+      padding: 44px 0 24px;
     }
     .dir-grid {
       grid-template-columns: repeat(2, 1fr);
@@ -257,7 +257,7 @@ const fmt = (n: number | null) => (n == null ? '집계 비공개' : `${n.toLocal
   }
   @media (max-width: 720px) {
     .page-hero {
-      padding: 56px 0 24px;
+      padding: 36px 0 20px;
     }
     .dir-grid {
       grid-template-columns: 1fr;
